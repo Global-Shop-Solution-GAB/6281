@@ -1,0 +1,191 @@
+Program.Sub.Preflight.Start
+	v.Global.dRet.Declare
+	v.Global.sHSConn.Declare(string,"")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+	'Make sHSConn an array
+	v.Global.sHSConn.Redim(0,1)
+	'Connect to Hubspot
+	f.Intrinsic.Control.CallSub(HubspotConnect)
+	'Connect to GSS
+	f.ODBC.Connection!con.opencompanyconnection(600)
+	'Check date the script ran last.  Use that date to query all parts that have been changed since then.
+	f.Global.Registry.ReadValue(v.Caller.Terminal,v.Caller.CompanyCode,v.Caller.ScriptFile,6281,1000,3,"1900-01-01",v.global.dRet)
+	
+	f.Intrinsic.Control.CallSub(SendPartsToHubspot)
+	
+	'Set registry value for the last date and time that the script ran
+	f.Intrinsic.Control.CallSub(SetProgramRun)
+	
+	'Adding this connection close in since there isnt an unload for this script -SS 11/15/21
+	f.Intrinsic.Control.If(V.ODBC.con.exists, =, 1)
+		f.ODBC.Connection!con.Close
+	f.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.HubspotConnect.Start
+	f.Intrinsic.Control.Try
+	v.Local.sErrorLogFile.Declare
+	v.Local.sDate.Declare
+	v.Local.sTime.Declare
+	v.Local.sConnStr.Declare
+	v.Local.sError.Declare
+	v.Local.sFile.declare
+
+	'Set the error log file path to the CUSTOM folder
+	f.Intrinsic.String.DateString(v.Ambient.Date,v.Local.sDate)
+	f.Intrinsic.String.TimeStringSec(v.Ambient.Time,v.Local.sTime)
+	f.Intrinsic.String.Build("{0}\CUSTOM\5856\HubspotLogFile_{1}_{2}.txt",v.Caller.GlobalDir,v.Local.sDate,v.Local.sTime,v.Local.sErrorLogFile)
+	f.Intrinsic.Control.CallSub(Hubspot_ReadSettings)
+	
+	f.Intrinsic.Control.If(v.Args.HubspotSetting,=,True)
+		'Function.Automation.HubSpot.SetLoginInfo(v.Screen.frmHubspotSettings!txtHub_ClientId.Text,v.Screen.frmHubspotSettings!txtHub_ClientSecret.text,"GetAndRefresh")
+		'f.Intrinsic.String.Build("InitiateOAuth=GetAndRefresh;OAuth Client Id={0}; OAuth Client Secret ={1};LogFile={2};Verbosity=5",v.Global.sHSConn(1),v.Global.sHSConn(2),v.Local.sErrorLogFile,v.Local.sConnStr)
+		f.Intrinsic.String.Build("InitiateOAuth=GetAndRefresh;OAuth Client Id={0}; OAuth Client Secret ={1};",v.Global.sHSConn(1),v.Global.sHSConn(2),v.Local.sConnStr)
+		Function.Automation.HubSpot.SetConnectionString(v.Local.sConnStr)
+		'F.ODBC.Connection!conx.OpenCompanyConnection(300)
+	f.Intrinsic.Control.else	'Write error log
+		'Closes ODBC connection, default to connection : "con"
+		f.Intrinsic.Control.If(V.ODBC.con.exists, =, 1)
+			f.ODBC.Connection!con.Close
+		f.Intrinsic.Control.EndIf
+		
+		'Generic Error message.
+		f.Intrinsic.String.Build("Project GCG_6281_PartUpload.g2u {0}{0}Subroutine: HubspotConnect{0}Error: Hubspot settings file does not exist.  Please re-initiate the connection to Hubspot for this Windows user and try again.", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+		
+		'Build file location
+		f.Intrinsic.String.Build("{0}\CUSTOM\5856\ErrorLog.txt",v.Caller.GlobalDir,v.Local.sFile)
+		
+		'Generate file
+		f.Intrinsic.File.String2File(v.Local.sFile,v.Local.sError)
+		
+		'End program
+		f.Intrinsic.Control.End
+
+		f.Intrinsic.UI.Msgbox("Hubspot Setting config file not found")
+		gui.frmHubspotSettings..visible(true)
+	f.Intrinsic.Control.endif
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.HubspotConnect.End
+
+Program.Sub.Hubspot_ReadSettings.Start
+f.Intrinsic.Control.Try
+v.local.sRet.Declare
+v.Local.sFilname.Declare
+v.local.bRet.Declare
+V.Local.iFile.Declare
+V.Local.sText.Declare
+v.Local.sSql.Declare
+v.Local.i.Declare
+v.Local.bExt.Declare
+
+	f.Intrinsic.String.Build("{0}\Custom\5856\Hotspotsettings.new",v.Caller.GlobalDir,v.local.sFilname)
+	Function.Intrinsic.File.Exists(V.Local.sFilname,v.local.bRet)
+	f.Intrinsic.Control.If(v.local.bRet,=,True)
+		F.Intrinsic.File.GetHandle(V.Local.iFile)
+		F.Intrinsic.File.OpenForRead(V.Local.sFilname,V.Local.iFile)
+		F.Intrinsic.File.ReadFile(V.Local.iFile,V.Local.sText)
+		f.Intrinsic.File.CloseFile(V.Local.iFile)
+		f.Intrinsic.String.Split(V.Local.sText,"!*!",V.global.sHSConn)
+		
+		f.Intrinsic.Variable.AddRV("HubspotSetting",True)
+	f.Intrinsic.Control.Else
+		f.Intrinsic.Variable.AddRV("HubspotSetting",False)
+	f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+
+Program.Sub.Hubspot_ReadSettings.End
+
+Program.Sub.SetProgramRun.Start
+	v.Local.sSQL.Declare
+	v.Local.dTime.Declare
+	v.Local.sTime.Declare
+	f.ODBC.Connection!ccon.opencommonconnection(500)
+	f.ODBC.Connection!ccon.Execute("delete from gs_registry where reg_id=6281")
+	F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,v.Caller.ScriptFile,6281,1000,False,"",False,0,-999.0,v.Ambient.Date,v.Ambient.Time,"")
+	'Time for some reason does not work in AddValue, so this is a workaround until the command can be fixed
+	f.Intrinsic.String.Format(v.Ambient.Now,"Hh:Nn:Ss",v.Local.sTime)
+	f.Intrinsic.String.Build("update gs_registry set tval='{0}' where reg_id=6281",v.Local.sTime,v.Local.sSQL)
+	f.ODBC.Connection!ccon.Execute(v.Local.sSQL)
+	f.ODBC.Connection!ccon.Close
+Program.Sub.SetProgramRun.End
+
+Program.Sub.SendPartsToHubspot.Start
+	f.Intrinsic.Control.Try
+		v.Local.sSQL.Declare
+		v.Local.sFilter.Declare
+		v.Local.iCnt.Declare
+		v.Local.sDescription.Declare
+		
+		'Get parts recently updated in GSS
+		f.Intrinsic.String.Build("select a.part, a.amt_price, b.text as Extra_Desc, a.description from v_inventory_mstr a left join v_inv_extra_text b on a.part=b.part where date_last_chg >= '{0}' and product_line in ('13','14','15','52','BC','RC','FC','HC','GB','OC','GC','AC','WP','RR','BS','RS','FS','HS','OS','GS','AS','LC','LS','SR','SK','SS','SI','SP','ST','SM')",v.Global.dRet.PervasiveDate,v.Local.sSQL)
+		f.Data.DataTable.CreateFromSQL("dtParts","con",v.Local.sSQL)
+		
+		'Check if part exists in Hubspot.  Determines if we run an insert or update.
+		Function.Automation.HubSpot.SelectToDatatable("dtHS","True","select * from Products")
+		f.Data.DataView.Create("dtHS","dvHS",22)
+		
+		'Loop through dtParts and see if each part exists in Hubspot already.  Insert or update from there.
+		f.Intrinsic.Control.For(v.Local.iCnt,0,v.DataTable.dtParts.RowCount--,1)
+			'Determine description source here
+			f.Intrinsic.Control.If(v.DataTable.dtParts(v.Local.iCnt).Extra_Desc!FieldVal,<>,"")
+				v.Local.sDescription.Set(v.DataTable.dtParts(v.Local.iCnt).Extra_Desc!FieldVal)
+			f.Intrinsic.Control.Else
+				v.Local.sDescription.Set(v.DataTable.dtParts(v.Local.iCnt).description!FieldVal)
+			f.Intrinsic.Control.EndIf
+			f.Intrinsic.String.Build("Name='{0}'",v.DataTable.dtParts(v.Local.iCnt).Part!FieldVal,v.Local.sFilter)
+			f.Data.DataView.SetFilter("dtHS","dvHS",v.Local.sFilter)
+			f.Intrinsic.Control.If(v.DataView.dths!dvHS.RowCount,>,0)
+				f.Intrinsic.String.Build("update Products set Price={0}, Description='{1}' where Name='{2}'",v.DataTable.dtParts(v.Local.iCnt).Amt_Price!FieldVal,v.Local.sDescription,v.DataTable.dtParts(v.Local.iCnt).Part!FieldVal,v.Local.sSQL)
+				'f.Intrinsic.String.Build("DELETE FROM Products where Name='{0}'",v.DataTable.dtParts(v.Local.iCnt).Part!FieldVal,v.Local.sSQL)
+				f.Automation.hubspot.ExecuteSQL(v.Local.sSQL)
+			f.Intrinsic.Control.Else
+				f.Intrinsic.String.Build("insert into Products (Price, Description, Name) values ({0},'{1}','{2}')",v.DataTable.dtParts(v.Local.iCnt).Amt_Price!FieldVal,v.Local.sDescription,v.DataTable.dtParts(v.Local.iCnt).Part!FieldVal,v.Local.sSQL)
+				f.Automation.hubspot.ExecuteSQL(v.Local.sSQL)
+			f.Intrinsic.Control.EndIf
+				
+		f.Intrinsic.Control.Next(v.Local.iCnt)
+		
+	f.Intrinsic.Control.Catch
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.SendPartsToHubspot.End
+
+Program.Sub.ErrorMsg.Start
+v.Local.sError.Declare
+v.Local.sFile.declare
+
+'Closes ODBC connection, default to connection : "con"
+f.Intrinsic.Control.If(V.ODBC.con.exists, =, 1)
+	f.ODBC.Connection!con.Close
+f.Intrinsic.Control.EndIf
+
+'Closes ODBC Common Connection : "ccon"
+f.Intrinsic.Control.If(V.ODBC.Ccon.exists, =, 1)
+	f.ODBC.Connection!Ccon.Close
+f.Intrinsic.Control.EndIf
+
+'Generic Error message.
+f.Intrinsic.String.Build("Project GCG_6281_PartUpload.g2u {0}{0}Subroutine: {1}{0}Error: {2} with Description: {3}", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+
+'Build file location
+f.Intrinsic.String.Build("{0}\CUSTOM\5856\ErrorLog.txt",v.Caller.GlobalDir,v.Local.sFile)
+
+'Generate file
+f.Intrinsic.File.String2File(v.Local.sFile,v.Local.sError)
+
+'End program
+f.Intrinsic.Control.End
+Program.Sub.ErrorMsg.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$dduncan$}$20211014101202600$}$r0o+00bj735YsiGsQ60YIo/Zb+26OZQGQCdlQLsfezKZwi+BoeeEO8ggbegNtHzL/Fos2JiO/rs=
+Program.Sub.Comments.End
