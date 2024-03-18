@@ -1,0 +1,2546 @@
+Program.Sub.Preflight.Start
+Program.External.Include.Library("GCG_5856_ORDUPL_UPLOAD.lib")
+v.global.sFile.Declare
+v.global.sFileContents.Declare
+v.global.dClosedDate.Declare
+Program.Sub.Preflight.End
+Program.Sub.ScreenSU.Start
+Gui.frrmHubspot..Create(BaseForm)
+Gui.frrmHubspot..Caption("Hubspot Integration")
+Gui.frrmHubspot..Size(683,567)
+Gui.frrmHubspot..MinX(0)
+Gui.frrmHubspot..MinY(0)
+Gui.frrmHubspot..Position(0,0)
+Gui.frrmHubspot..AlwaysOnTop(False)
+Gui.frrmHubspot..FontName("Tahoma")
+Gui.frrmHubspot..FontSize(8.25)
+Gui.frrmHubspot..ControlBox(True)
+Gui.frrmHubspot..MaxButton(True)
+Gui.frrmHubspot..MinButton(True)
+Gui.frrmHubspot..MousePointer(0)
+Gui.frrmHubspot..Moveable(True)
+Gui.frrmHubspot..Sizeable(True)
+Gui.frrmHubspot..ShowInTaskBar(True)
+Gui.frrmHubspot..TitleBar(True)
+Gui.frrmHubspot..Event(UnLoad,frrmHubspot_UnLoad)
+Gui.frrmHubspot.cmdSettings.Create(Button)
+Gui.frrmHubspot.cmdSettings.Enabled(True)
+Gui.frrmHubspot.cmdSettings.Visible(True)
+Gui.frrmHubspot.cmdSettings.Zorder(0)
+Gui.frrmHubspot.cmdSettings.Size(115,32)
+Gui.frrmHubspot.cmdSettings.Position(545,8)
+Gui.frrmHubspot.cmdSettings.Caption("Hubspot Settings")
+Gui.frrmHubspot.cmdSettings.FontName("Tahoma")
+Gui.frrmHubspot.cmdSettings.FontSize(8.25)
+Gui.frrmHubspot.cmdSettings.Event(Click,cmdSettings_Click)
+Gui.frrmHubspot.cmdSettings.BackColor(-2147483633)
+Gui.frrmHubspot.lblLastupdated.Create(Label,"Last Updated Date :",True,88,12,0,176,46,True,0,"Tahoma",7.8,,0,0)
+Gui.frrmHubspot.lblLastupdated.BorderStyle(0)
+Gui.frrmHubspot.cmdImport.Create(Button)
+Gui.frrmHubspot.cmdImport.Enabled(True)
+Gui.frrmHubspot.cmdImport.Visible(True)
+Gui.frrmHubspot.cmdImport.Zorder(0)
+Gui.frrmHubspot.cmdImport.Size(115,32)
+Gui.frrmHubspot.cmdImport.Position(355,8)
+Gui.frrmHubspot.cmdImport.Caption("Refresh Data")
+Gui.frrmHubspot.cmdImport.FontName("Tahoma")
+Gui.frrmHubspot.cmdImport.FontSize(8.25)
+Gui.frrmHubspot.cmdImport.Event(Click,cmdImport_Click)
+Gui.frrmHubspot.cmdImport.BackColor(-2147483633)
+Gui.frrmHubspot.GsGridQuotes.Create(GsGridControl)
+Gui.frrmHubspot.GsGridQuotes.Enabled(True)
+Gui.frrmHubspot.GsGridQuotes.Visible(True)
+Gui.frrmHubspot.GsGridQuotes.Zorder(0)
+Gui.frrmHubspot.GsGridQuotes.Size(683,469)
+Gui.frrmHubspot.GsGridQuotes.Position(0,68)
+Gui.frrmHubspot.GsGridQuotes.Event(RowCellClick,GsGridQuotes_RowCellClick)
+Gui.frrmHubspot.GsGridQuotes.Event(CellValueChanged,GsGridQuotes_CellValueChanged)
+Gui.frrmHubspot.GsGridQuotes.Dock(0)
+Gui.frrmHubspot.GsGridQuotes.Anchor(15)
+Gui.frrmHubspot.dtpClosedDate.Create(DatePicker)
+Gui.frrmHubspot.dtpClosedDate.Enabled(True)
+Gui.frrmHubspot.dtpClosedDate.Visible(True)
+Gui.frrmHubspot.dtpClosedDate.Zorder(0)
+Gui.frrmHubspot.dtpClosedDate.Size(100,20)
+Gui.frrmHubspot.dtpClosedDate.Position(130,17)
+Gui.frrmHubspot.dtpClosedDate.CheckBox(False)
+Gui.frrmHubspot.dtpClosedDate.FontName("Tahoma")
+Gui.frrmHubspot.dtpClosedDate.FontSize(8.25)
+Gui.frrmHubspot.dtpClosedDate.ToolTip("Only deals closed on this date or after will be brought into the grid, along with all open deals.")
+Gui.frrmHubspot.lbl1.Create(Label,"Deal Closed Start Date",True,109,13,0,10,21,True,0,"Tahoma",8.25,,0,0)
+Gui.frrmHubspot.lbl1.BorderStyle(0)
+Gui.frmHubspotSettings..Create(BaseForm)
+Gui.frmHubspotSettings..Caption("Hubspot Settings")
+Gui.frmHubspotSettings..Size(671,457)
+Gui.frmHubspotSettings..MinX(0)
+Gui.frmHubspotSettings..MinY(0)
+Gui.frmHubspotSettings..Position(0,0)
+Gui.frmHubspotSettings..AlwaysOnTop(False)
+Gui.frmHubspotSettings..FontName("Tahoma")
+Gui.frmHubspotSettings..FontSize(8.25)
+Gui.frmHubspotSettings..ControlBox(True)
+Gui.frmHubspotSettings..MaxButton(False)
+Gui.frmHubspotSettings..MinButton(False)
+Gui.frmHubspotSettings..MousePointer(0)
+Gui.frmHubspotSettings..Moveable(True)
+Gui.frmHubspotSettings..Sizeable(True)
+Gui.frmHubspotSettings..ShowInTaskBar(True)
+Gui.frmHubspotSettings..TitleBar(True)
+Gui.frmHubspotSettings..Event(UnLoad,frmHubspotSettings_UnLoad)
+Gui.frmHubspotSettings.lbl1.Create(Label,"Hubspot Acct :",True,92,17,0,14,18,True,0,"Tahoma",8.25,,0,0)
+Gui.frmHubspotSettings.lbl1.BorderStyle(0)
+Gui.frmHubspotSettings.lbl2.Create(Label,"Client ID :",True,60,17,0,14,44,True,0,"Tahoma",8.25,,0,0)
+Gui.frmHubspotSettings.lbl2.BorderStyle(0)
+Gui.frmHubspotSettings.lbl3.Create(Label,"Client Secret :",True,85,17,0,16,72,True,0,"Tahoma",8.25,,0,0)
+Gui.frmHubspotSettings.lbl3.BorderStyle(0)
+Gui.frmHubspotSettings.txtHub_Account.Create(TextBox,"",True,123,24,0,111,17,True,0,"Tahoma",8.25,,1)
+Gui.frmHubspotSettings.txtHub_Account.TabStop(True)
+Gui.frmHubspotSettings.txtHub_Account.TabIndex(1)
+Gui.frmHubspotSettings.txtHub_ClientId.Create(TextBox,"",True,544,24,0,111,45,True,0,"Tahoma",8.25,,1)
+Gui.frmHubspotSettings.txtHub_ClientId.TabStop(True)
+Gui.frmHubspotSettings.txtHub_ClientId.TabIndex(2)
+Gui.frmHubspotSettings.txtHub_ClientSecret.Create(TextBox,"",True,543,24,0,111,73,True,0,"Tahoma",8.25,,1)
+Gui.frmHubspotSettings.txtHub_ClientSecret.TabStop(True)
+Gui.frmHubspotSettings.txtHub_ClientSecret.TabIndex(3)
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.Create(Button)
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.Enabled(True)
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.Visible(True)
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.Zorder(0)
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.Size(89,29)
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.Position(443,7)
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.Caption("Save")
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.FontName("Tahoma")
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.FontSize(8.25)
+Gui.frmHubspotSettings.cmdHubspot_SaveSettings.Event(Click,cmdHubspot_SaveSettings_Click)
+Gui.frmHubspotSettings.cmdHubspotInit.Create(Button)
+Gui.frmHubspotSettings.cmdHubspotInit.Enabled(True)
+Gui.frmHubspotSettings.cmdHubspotInit.Visible(True)
+Gui.frmHubspotSettings.cmdHubspotInit.Zorder(0)
+Gui.frmHubspotSettings.cmdHubspotInit.Size(112,29)
+Gui.frmHubspotSettings.cmdHubspotInit.Position(543,7)
+Gui.frmHubspotSettings.cmdHubspotInit.Caption("Hubspot Initilize")
+Gui.frmHubspotSettings.cmdHubspotInit.FontName("Tahoma")
+Gui.frmHubspotSettings.cmdHubspotInit.FontSize(7.8)
+Gui.frmHubspotSettings.cmdHubspotInit.Event(Click,cmdHubspotInit_Click)
+Gui.frmHubspotSettings.frameRFQStage.Create(Frame)
+Gui.frmHubspotSettings.frameRFQStage.Enabled(True)
+Gui.frmHubspotSettings.frameRFQStage.Visible(True)
+Gui.frmHubspotSettings.frameRFQStage.Zorder(0)
+Gui.frmHubspotSettings.frameRFQStage.Size(646,126)
+Gui.frmHubspotSettings.frameRFQStage.Position(13,143)
+Gui.frmHubspotSettings.frameRFQStage.Caption("")
+Gui.frmHubspotSettings.frameRFQStage.FontName("Tahoma")
+Gui.frmHubspotSettings.frameRFQStage.FontSize(7.8)
+Gui.frmHubspotSettings.lbl7.Create(Label,"RFQ Stage",True,61,16,0,-1,0,True,0,"Tahoma",7.8,,0,0)
+Gui.frmHubspotSettings.lbl7.BorderStyle(0)
+Gui.frmHubspotSettings.lbl7.Parent("frameRFQStage")
+Gui.frmHubspotSettings.txtMultRfqStage_Body.Create(TextboxM)
+Gui.frmHubspotSettings.txtMultRfqStage_Body.Enabled(True)
+Gui.frmHubspotSettings.txtMultRfqStage_Body.Visible(True)
+Gui.frmHubspotSettings.txtMultRfqStage_Body.Zorder(0)
+Gui.frmHubspotSettings.txtMultRfqStage_Body.Size(372,71)
+Gui.frmHubspotSettings.txtMultRfqStage_Body.Position(95,46)
+Gui.frmHubspotSettings.txtMultRfqStage_Body.FontName("Tahoma")
+Gui.frmHubspotSettings.txtMultRfqStage_Body.FontSize(7.8)
+Gui.frmHubspotSettings.txtMultRfqStage_Body.Parent("frameRFQStage")
+Gui.frmHubspotSettings.txtMultRfqStage_Body.TabStop(True)
+Gui.frmHubspotSettings.txtMultRfqStage_Body.TabIndex(6)
+Gui.frmHubspotSettings.lstEmailGrp.Create(ListView)
+Gui.frmHubspotSettings.lstEmailGrp.Enabled(True)
+Gui.frmHubspotSettings.lstEmailGrp.Visible(True)
+Gui.frmHubspotSettings.lstEmailGrp.Zorder(0)
+Gui.frmHubspotSettings.lstEmailGrp.Size(178,132)
+Gui.frmHubspotSettings.lstEmailGrp.Position(472,20)
+Gui.frmHubspotSettings.lstEmailGrp.FontName("Arial")
+Gui.frmHubspotSettings.lstEmailGrp.FontSize(8)
+Gui.frmHubspotSettings.lstEmailGrp.View(3)
+Gui.frmHubspotSettings.lstEmailGrp.Multiselect(False)
+Gui.frmHubspotSettings.lstEmailGrp.CheckBoxes(True)
+Gui.frmHubspotSettings.lstEmailGrp.Parent("frameRFQStage")
+Gui.frmHubspotSettings.lbl6.Create(Label,"Body :",True,36,16,0,29,46,True,0,"Tahoma",7.8,,0,0)
+Gui.frmHubspotSettings.lbl6.BorderStyle(0)
+Gui.frmHubspotSettings.lbl6.Parent("frameRFQStage")
+Gui.frmHubspotSettings.txtRFQStage_Subj.Create(TextBox,"",True,371,22,0,96,20,True,0,"Tahoma",7.8,,1)
+Gui.frmHubspotSettings.txtRFQStage_Subj.Parent("frameRFQStage")
+Gui.frmHubspotSettings.txtRFQStage_Subj.TabStop(True)
+Gui.frmHubspotSettings.txtRFQStage_Subj.TabIndex(5)
+Gui.frmHubspotSettings.lbl5.Create(Label,"Subject :",True,52,16,0,29,21,True,0,"Tahoma",7.8,,0,0)
+Gui.frmHubspotSettings.lbl5.BorderStyle(0)
+Gui.frmHubspotSettings.lbl5.Parent("frameRFQStage")
+Gui.frmHubspotSettings.frameSalesRepCHG.Create(Frame)
+Gui.frmHubspotSettings.frameSalesRepCHG.Enabled(True)
+Gui.frmHubspotSettings.frameSalesRepCHG.Visible(True)
+Gui.frmHubspotSettings.frameSalesRepCHG.Zorder(0)
+Gui.frmHubspotSettings.frameSalesRepCHG.Size(648,136)
+Gui.frmHubspotSettings.frameSalesRepCHG.Position(12,274)
+Gui.frmHubspotSettings.frameSalesRepCHG.Caption("")
+Gui.frmHubspotSettings.frameSalesRepCHG.FontName("Tahoma")
+Gui.frmHubspotSettings.frameSalesRepCHG.FontSize(7.8)
+Gui.frmHubspotSettings.lbl10.Create(Label,"Body :",True,36,16,0,29,52,True,0,"Tahoma",7.8,,0,0)
+Gui.frmHubspotSettings.lbl10.BorderStyle(0)
+Gui.frmHubspotSettings.lbl10.Parent("frameSalesRepCHG")
+Gui.frmHubspotSettings.txtSalesRep_Body.Create(TextboxM)
+Gui.frmHubspotSettings.txtSalesRep_Body.Enabled(True)
+Gui.frmHubspotSettings.txtSalesRep_Body.Visible(True)
+Gui.frmHubspotSettings.txtSalesRep_Body.Zorder(0)
+Gui.frmHubspotSettings.txtSalesRep_Body.Size(374,74)
+Gui.frmHubspotSettings.txtSalesRep_Body.Position(93,48)
+Gui.frmHubspotSettings.txtSalesRep_Body.FontName("Tahoma")
+Gui.frmHubspotSettings.txtSalesRep_Body.FontSize(7.8)
+Gui.frmHubspotSettings.txtSalesRep_Body.Parent("frameSalesRepCHG")
+Gui.frmHubspotSettings.txtSalesRep_Body.TabStop(True)
+Gui.frmHubspotSettings.txtSalesRep_Body.TabIndex(8)
+Gui.frmHubspotSettings.txtSalesRep_Subj.Create(TextBox,"",True,376,22,0,93,22,True,0,"Tahoma",7.8,,1)
+Gui.frmHubspotSettings.txtSalesRep_Subj.Parent("frameSalesRepCHG")
+Gui.frmHubspotSettings.txtSalesRep_Subj.TabStop(True)
+Gui.frmHubspotSettings.txtSalesRep_Subj.TabIndex(7)
+Gui.frmHubspotSettings.lbl9.Create(Label,"Subject :",True,52,16,0,29,22,True,0,"Tahoma",7.8,,0,0)
+Gui.frmHubspotSettings.lbl9.BorderStyle(0)
+Gui.frmHubspotSettings.lbl9.Parent("frameSalesRepCHG")
+Gui.frmHubspotSettings.lbl8.Create(Label,"SalesRep Change",True,100,16,0,6,-2,True,0,"Tahoma",7.8,,0,0)
+Gui.frmHubspotSettings.lbl8.BorderStyle(0)
+Gui.frmHubspotSettings.lbl8.Parent("frameSalesRepCHG")
+Program.Sub.ScreenSU.End
+
+
+
+Program.Sub.Main.Start
+f.Intrinsic.Control.Try
+Function.Intrinsic.UI.UsePixels ' Allows you to use Pixels instead of Twips throughout
+'Author: Daniel Duncan
+'Customer: Rome Grinding Solutions
+'Program Name: Hubspot Integration
+'Date Started: 2/1/2021
+'Description: Thsi script connects with Hubspot using credentials established as part of the trusted app setup within Hubspot.  It queries HS for deals and correlates those with existing quotes, customers, and contacts in GSS.  If the deal does not correspond to something in GSS, the user can create those master records in GSS.
+'Note: Apologies for the mess of this code.  I inherited this project and did not take the time to clean it up.  "Sorry 'bout that".
+
+V.Local.ssql.Declare
+v.local.iRet.declare
+v.Global.bEnt.declare
+
+'Script PPT_Contact_Upload.gas should be on hook 45619
+f.Intrinsic.Control.If(Variable.Ambient.IsInTaskScheduler,=,True)
+	v.Global.bEnt.Set(True)
+	'SAVE/Create XML File
+	f.Intrinsic.Control.CallSub(LoadXMLData)
+f.Intrinsic.Control.elseIf(v.Caller.Switches,=,"X")
+	Function.Intrinsic.UI.MsgBox("Do you want to Import company/contact information to XML?", "Confirm", 4,v.local.iRet)
+	F.Intrinsic.Control.If(v.local.iRet,=,6)
+		F.Intrinsic.UI.InvokeWaitDialog("Importing data (company and contact info)..., Please Wait...")
+		v.Global.bEnt.Set(True)
+		'SAVE/Create XML File from custom menu
+		f.Intrinsic.Control.CallSub(LoadXMLData)
+		F.Intrinsic.UI.CloseWaitDialog
+	f.Intrinsic.Control.endif
+f.Intrinsic.Control.ElseIf(v.Caller.Hook,=,17343)
+'Quote Won/Loss
+	'dont load grp email
+	v.Global.bEnt.Set(True)
+	f.Intrinsic.Control.If(v.Caller.User,=,"SUPERVSR")
+		
+	f.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Control.CallSub(Hubspot_UpdateStage,"TblName","v_Quote_Header","FldName","Quote_No","TranNO",Variable.Passed.QUOTE,"HubMode","STAGE")
+f.Intrinsic.Control.elseIf(v.Caller.Hook,=,10532)
+'QO Line Save
+	v.Global.bEnt.Set(True)
+	f.Intrinsic.Control.CallSub(Hubspot_UpdateStage,"TblName","v_Quote_Header","FldName","Quote_No","TranNO",Variable.Passed.000060,"Amt",Variable.Passed.000135,"HubMode","AMT")
+f.Intrinsic.Control.elseIf(v.Caller.Hook,=,12231)
+'SO Line Save
+	v.Global.bEnt.Set(True)
+	f.Intrinsic.Control.CallSub(Hubspot_UpdateStage,"TblName","v_Order_Header","FldName","Order_No","TranNO",Variable.Passed.000060,"Amt",Variable.Passed.000097,"HubMode","AMT")
+'f.Intrinsic.Control.elseIf(v.Caller.Hook,=,51012,"or",v.Caller.Hook,=,51029)
+''CRM populate - capture salesrep to see if it changed
+''CRM save 51029
+'	f.Intrinsic.Control.CallSub(CRM_chgstatus)
+f.Intrinsic.Control.ElseIf(v.Caller.Hook,=,14350)
+'customer populate hook
+	f.Intrinsic.Control.CallSub(Temp_FileRead)
+f.Intrinsic.Control.elseIf(v.Caller.Switches,=,"M")
+
+	f.Intrinsic.Control.CallSub(Hubspot_ReadSettings)
+	f.Intrinsic.Control.CallSub(cmdSettings_Click)
+f.Intrinsic.Control.else
+'Load Quotes
+	f.Intrinsic.Control.If(v.Caller.User.Trim,=,"SUPERVSR")
+		gui.frrmHubspot.cmdSettings.Visible(true)
+	f.Intrinsic.Control.Else
+		gui.frrmHubspot.cmdSettings.Visible(false)
+	f.Intrinsic.Control.EndIf
+	
+	'Set closed date
+	f.Intrinsic.Date.DateAdd("D",-14,v.Ambient.Date,v.global.dClosedDate)
+	gui.frrmHubspot.dtpClosedDate.Value(v.global.dClosedDate.PervasiveDate)
+	
+	'Read in settings from file
+	f.Intrinsic.String.Build("{0}\CUSTOM\5856\Hotspotsettings.new",v.Caller.GlobalDir,v.Global.sFile)
+	f.Intrinsic.File.File2String(v.Global.sFile,v.Global.sFileContents)
+	f.Intrinsic.String.Split(v.Global.sfilecontents,"!*!",v.Global.sFileContents)
+
+	f.Intrinsic.Control.CallSub(Hubspot_connect)
+	F.Intrinsic.UI.InvokeWaitDialog("Loading Data...Importing, Please Wait...")
+	f.Intrinsic.Control.CallSub(Check_WebImporter)
+	f.Intrinsic.Control.CallSub(LoadData)
+	F.Intrinsic.UI.CloseWaitDialog
+'	gui.frrmHubspot.tabHotspot.SetTab(0)
+'	
+'	gui.frrmHubspot.tabHotspot.Anchor(15)
+	gui.frrmHubspot.GsGridQuotes.Anchor(15)
+	'gui.frrmHubspot.GsGridCSR.Anchor(15)
+	gui.frrmHubspot.cmdImport.Anchor(9)
+	'gui.frrmHubspot.cmdImportCSR.Anchor(9)
+	gui.frrmHubspot.cmdSettings.Anchor(9)
+	gui.frrmHubspot.lblLastupdated.Anchor(9)
+	'gui.frrmHubspot.lblupdatedCSR.Anchor(9)
+'	gui.frrmHubspot..WindowState(2)
+	gui.frrmHubspot..Show
+f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Main.End
+
+Program.Sub.LoadGrid.Start
+f.Intrinsic.Control.Try
+
+v.Local.stitle.Declare
+v.Local.i.Declare
+v.Local.iTotClmn.Declare
+v.Local.ssql.Declare
+V.Local.sRet.Declare
+v.Local.sfieldsName.Declare
+V.Local.sRet1.Declare
+
+
+F.Data.DataView.Create("DTCSR","DVCSR")
+f.Data.DataView.SetSort("DTCSR","DVCSR","AssociatedCompanyIds1 asc")
+
+f.Intrinsic.Control.If(V.DataView.DTCSR!DVCSR.RowCount,>,0)
+	
+
+	F.Data.DataTable.AddColumn("DTCSR","CreateCSR","String")
+	'F.Data.DataTable.AddColumn("DTCSR","DealStage","String")
+	F.Data.DataTable.AddColumn("DTCSR","GSSCust_Browse","string","^")
+	F.Data.DataTable.AddColumn("DTCSR","GSSCont_Browse","string","^")
+	
+'	V.Local.ssql.Set(V.DataTable.DTCSR.FieldNames)
+'	gui.frrmHubspot.GsGridCSR.AddGridViewFromDataView("GridView","DTCSR","DVCSR")
+
+'	gui.frrmHubspot.GsGridCSR.GetColumnCount("GridView",v.Local.iTotClmn)
+	f.Intrinsic.Math.Sub(v.Local.iTotClmn,1,v.Local.iTotClmn)
+	f.Intrinsic.Control.For(v.Local.i,0,v.Local.iTotClmn,1)
+'		gui.frrmHubspot.GsGridCSR.GetColumnNamebyIndex("GridView",v.Local.i,v.Local.stitle)
+'		gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView",v.Local.stitle,"AllowEdit",False)
+'		gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView",v.Local.stitle,"ReadOnly",True)
+'	
+'		gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView",v.Local.stitle,"HeaderFontBold","True")
+'		gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView",v.Local.stitle,"HeaderBackColor","LIGHTBLUE")
+'		gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView",v.Local.stitle,"HeaderHAlignment","Center")
+'		gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView",v.Local.stitle,"HeaderWordWrap","wrap")
+'		
+'		gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView",v.Local.stitle,"visible",false)
+		
+	f.Intrinsic.Control.Next(v.Local.i)
+	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CreateCSR","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealStage","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealName","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealId","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CompanyName","visible",True)
+'	'gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","AdditionalInformation","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Customer","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Contact","visible",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_CSRNO","visible",True)
+'	
+'	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","AllowEdit",False)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","CellBackColor", "#A9A9A9")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","CellFontBold",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","VisibleIndex",1)
+'	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","ReadOnly",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","Caption"," ")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","CellHAlignment","Center")
+'	'gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","MaxWidth","30")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","ShowCaption",False)
+'	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","AllowEdit",False)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","CellBackColor", "#A9A9A9")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","CellFontBold",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","VisibleIndex",1)
+'	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","ReadOnly",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","Caption"," ")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","CellHAlignment","Center")
+'	'gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","MaxWidth","30")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","ShowCaption",False)
+'	
+'	gui.frrmHubspot.GsGridCSR.SetGridViewProperty("GridView", "ColumnPanelRowHeight", "40")
+'	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CreateCSR","ShowCaption",False)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CreateCSR","AllowEdit",False)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CreateCSR","CellBackColor", "#A9A9A9")   '#C0C0C0
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CreateCSR","MinWidth",100)
+'	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Customer","CellForeColor", "blue")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Customer","CellFontUnderline",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealId","CellForeColor", "blue")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealId","CellFontUnderline",True)
+
+
+''	gui.frrmHubspot.GsGridCSR.AddStyleFormatCondition("GridView","CreateCSR","Parentorange","Expression","[GSS_CSRNO] <> '' ")
+'	gui.frrmHubspot.GsGridCSR.AddStyleFormatCOndition("GridView", "GSS_CSRNO", "tagName2","NOTEqual","")
+'	gui.frrmHubspot.GsGridCSR.SetStyleFormatConditionProperty("GridView","GSS_CSRNO","tagName2","backcolor","#FFFFCC")
+'	gui.frrmHubspot.GsGridCSR.SetStyleFormatConditionProperty("GridView","GSS_CSRNO","tagName2","ApplyToRow",True)
+
+
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CompanyName","Caption","Company Name")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Customer","Caption","GSS Customer")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Contact","Caption","GSS Contact")
+
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_CSRNO","Caption","GSS CSRNo")
+'	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Customer","Fixed","Left")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","Fixed","Left")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Contact","Fixed","Left")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","Fixed","Left")
+'	
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Customer","VisibleIndex",0)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCust_Browse","VisibleIndex",1)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_Contact","VisibleIndex",2)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSSCont_Browse","VisibleIndex",3)
+'	
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CompanyName","Fixed","Left")
+
+
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","GSS_CSRNO","Fixed","Left")
+''	
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealId","Fixed","Left")
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealStage","Fixed","Left")
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CreateDate","Fixed","Left")
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","OpportunityStage","Fixed","Left")
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","fname","Fixed","Left")
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","lname","Fixed","Left")
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","CreateCSR","Fixed","Right")
+'	
+'	gui.frrmHubspot.GsGridCSR.ColumnEdit("GridView","GSSCont_Browse","EditorButton","^")
+'	gui.frrmHubspot.GsGridCSR.ColumnEdit("GridView","GSSCust_Browse","EditorButton","^")
+'	gui.frrmHubspot.GsGridCSR.ColumnEdit("GridView","CreateCSR","EditorButton","Create CSR")
+	
+	
+	V.Local.sRet.Set("Needs Analysis*!*Proposal*!*Negotiation*!*Closed Won*!*Closed Lost")
+'	gui.frrmHubspot.GsGridCSR.ColumnEdit("GridView","DealStage","Dropdownlist",V.Local.sRet)
+
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealStage","AllowEdit",True)
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","DealStage","ReadOnly",False)
+''	
+'	gui.frrmHubspot.GsGridCSR.SetGridViewProperty("GridView","OptionsViewShowAutoFilterRow",True)
+
+'	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView", "CreateDate", "DisplayCustomDatetime", "d")
+'	'gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView", "QuoteNeededDate", "DisplayCustomDatetime", "d")
+''	gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView", "CloseDate", "DisplayCustomDatetime", "d")
+'	gui.frrmHubspot.GsGridCSR.SetGridViewProperty("GridView", "OptionsSelectionEnableAppearanceFocusedRow", "True") 
+'	
+''	Gui.frrmHubspot.GsGridCSR.SetColumnProperty("GridView","Amount","DisplayCustomNumeric","#,##0.00")
+'	gui.frrmHubspot.GsGridCSR.SetGridViewProperty("GridView","OptionsViewColumnAutoWidth",False)
+'	gui.frrmHubspot.GsGridCSR.bestfitcolumns("GridView")
+'	gui.frrmHubspot.GsGridCSR.ResumeLayout
+'	gui.frrmHubspot.GsGridCSR.MainView("GridView")
+	
+f.Intrinsic.Control.endif
+
+
+F.Intrinsic.UI.CloseWaitDialog
+
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.LoadGrid.End
+
+Program.Sub.ErrorMsg.Start
+v.Local.sError.Declare
+
+f.Intrinsic.String.Build("Project GCG_5856_HubspotIntegration.g2u {0}{0}Subroutine: {1}{0}Error: {2} with Description: {3}", v.Ambient.NewLine, v.Args.CurrentSub, v.Ambient.ErrorNumber, v.Ambient.ErrorDescription, v.Local.sError)
+
+f.Intrinsic.UI.Msgbox(v.Local.sError)
+
+
+'f.Intrinsic.Control.If(v.Ambient.ErrorNumber,=,207020)
+'	f.Intrinsic.Control.If(v.Caller.User.Trim,=,"SUPERVSR")
+'		gui.frmHubspotSettings..Show
+'		Gui.frmHubspotSettings..WaitForDismiss
+'	f.Intrinsic.Control.EndIf
+'f.Intrinsic.Control.EndIf
+
+Program.Sub.ErrorMsg.End
+
+
+Program.Sub.cmdImport_Click.Start
+f.Intrinsic.Control.Try
+
+v.local.iRet.Declare
+
+Function.Intrinsic.UI.MsgBox("Do you want to Import Data?", "Confirm", 4,v.local.iRet)
+F.Intrinsic.Control.If(v.local.iRet,=,6)
+	F.Intrinsic.UI.InvokeWaitDialog("Data...Importing, Please Wait...")
+'	f.Intrinsic.Control.CallSub(Refresh_Data,"ImportData","QO","LoadXML",false)
+	'load data from XML
+	gui.frrmHubspot..Enabled(false)
+	'f.Intrinsic.Control.CallSub(Refresh_Data2,"LoadXML",True)
+	f.Intrinsic.Control.CallSub(Refresh_Data2,"LoadXML",False)
+	gui.frrmHubspot..Enabled(true)
+	F.Intrinsic.UI.CloseWaitDialog
+f.Intrinsic.Control.endif
+
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmdImport_Click.End
+
+
+Program.Sub.LoadData.Start
+f.Intrinsic.Control.Try
+v.local.bRet.Declare
+V.Local.sXML.Declare
+
+
+f.Intrinsic.String.Build("{0}\Custom\5856\data5856_{1}.new",v.Caller.GlobalDir,"CONT",v.local.sXML)
+Function.Intrinsic.File.Exists(V.Local.sXML,v.local.bRet)
+f.Intrinsic.Control.If(v.local.bRet,=,True)
+	'f.Intrinsic.Control.CallSub(Refresh_Data2,"LoadXML",True)
+	f.Intrinsic.Control.CallSub(Refresh_Data2,"LoadXML",False)
+f.Intrinsic.Control.Else
+'if xml not found load from hubspot
+	f.Intrinsic.Control.CallSub(Refresh_Data2,"LoadXML",false)
+f.Intrinsic.Control.Endif
+
+f.Intrinsic.Control.CallSub(deserialize)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.LoadData.End
+
+Program.Sub.LoadData_Quote.Start
+f.Intrinsic.Control.Try
+v.Local.stitle.Declare
+v.Local.i.Declare
+v.Local.iTotClmn.Declare
+v.Local.ssql.Declare
+V.Local.sRet.Declare
+
+
+
+F.Data.DataView.Create("DTQuote","DVQuote")
+f.Data.DataView.SetSort("DTQuote","DVQuote","AssociatedCompanyIds1 asc")
+
+f.Intrinsic.Control.If(V.DataView.DTQuote!DVQuote.RowCount,>,0)
+	
+	F.Data.DataTable.AddColumn("DTQuote","CreateQuote","String")
+	'F.Data.DataTable.AddColumn("DTQuote","DealStage","String")
+	F.Data.DataTable.AddColumn("DTQuote","GSSCust_Browse","string","Add Customer")
+	F.Data.DataTable.AddColumn("DTQuote","GSSCont_Browse","string","Add Contact")
+	
+	V.Local.ssql.Set(V.DataTable.DTQuote.FieldNames)
+
+	gui.frrmHubspot.GsGridQuotes.AddGridViewFromDataView("GridView_Q","DTQuote","DVQuote")
+
+	gui.frrmHubspot.GsGridQuotes.GetColumnCount("GridView_Q",v.Local.iTotClmn)
+	f.Intrinsic.Math.Sub(v.Local.iTotClmn,1,v.Local.iTotClmn)
+	f.Intrinsic.Control.For(v.Local.i,0,v.Local.iTotClmn,1)
+		gui.frrmHubspot.GsGridQuotes.GetColumnNamebyIndex("GridView_Q",v.Local.i,v.Local.stitle)
+		gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q",v.Local.stitle,"AllowEdit",False)
+		gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q",v.Local.stitle,"ReadOnly",True)
+	
+		gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q",v.Local.stitle,"HeaderFontBold","True")
+		gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q",v.Local.stitle,"HeaderBackColor","#7FFF00")
+		gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q",v.Local.stitle,"HeaderHAlignment","Center")
+		gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q",v.Local.stitle,"HeaderWordWrap","wrap")
+		
+		gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q",v.Local.stitle,"visible",false)
+	f.Intrinsic.Control.Next(v.Local.i)
+
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealStage","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","visible",True)
+	'gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","RFQStage","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealName","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealId","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CompanyName","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","Amount","visible",True)
+	'gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","AdditionalInformation","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Customer","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Contact","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_QuoteNO","visible",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CreateQuote","visible",True)
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","AllowEdit",False)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","CellBackColor", "#A9A9A9")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","CellFontBold",True)
+
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","ReadOnly",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","Caption"," ")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","CellHAlignment","Center")
+	'gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","MaxWidth","30")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","ShowCaption",False)
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","AllowEdit",False)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","CellBackColor", "#A9A9A9")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","CellFontBold",True)
+	
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","ReadOnly",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","Caption"," ")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","CellHAlignment","Center")
+	'gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","MaxWidth","30")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","ShowCaption",False)
+	
+	gui.frrmHubspot.GsGridQuotes.SetGridViewProperty("GridView_Q", "ColumnPanelRowHeight", "40")
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CreateQuote","ShowCaption",False)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CreateQuote","AllowEdit",False)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CreateQuote","CellBackColor", "#A9A9A9")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CreateQuote","MinWidth",100)
+	
+	gui.frrmHubspot.GsGridQuotes.AddStyleFormatCOndition("GridView_Q", "GSS_QuoteNO", "tagName2","NOTEqual","")
+	gui.frrmHubspot.GsGridQuotes.SetStyleFormatCOnditionProperty("GridView_Q","GSS_QuoteNO", "tagName2", "backcolor", "#FFFFCC")
+	gui.frrmHubspot.GsGridQuotes.SetStyleFormatCOnditionProperty("GridView_Q",  "GSS_QuoteNO", "tagName2", "ApplyToRow", True)
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CompanyName","Caption","Company Name")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Customer","Caption","GSS Customer")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Contact","Caption","GSS Contact")
+
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_QuoteNO","Caption","GSS QuoteNo")
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_QuoteNO","CellForeColor", "blue")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_QuoteNO","CellFontUnderline",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Customer","CellForeColor", "blue")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Customer","CellFontUnderline",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealId","CellForeColor", "blue")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealId","CellFontUnderline",True)
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Customer","Fixed","Left")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","Fixed","Left")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Contact","Fixed","Left")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","Fixed","Left")
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Customer","VisibleIndex",0)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCust_Browse","VisibleIndex",1)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_Contact","VisibleIndex",2)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSSCont_Browse","VisibleIndex",3)
+	
+	
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CompanyName","Fixed","Left")
+'	
+
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","GSS_QuoteNO","Fixed","Left")
+'	
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealId","Fixed","Left")
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealStage","Fixed","Left")
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CreateDate","Fixed","Left")
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","fname","Fixed","Left")
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","lname","Fixed","Left")
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","CreateQuote","Fixed","Right")
+	
+	gui.frrmHubspot.GsGridQuotes.ColumnEdit("GridView_Q","GSSCust_Browse","EditorButton","^")
+	gui.frrmHubspot.GsGridQuotes.ColumnEdit("GridView_Q","GSSCont_Browse","EditorButton","^")
+	gui.frrmHubspot.GsGridQuotes.ColumnEdit("GridView_Q","CreateQuote","EditorButton","Create Quote")
+	
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealStage","AllowEdit",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealStage","ReadOnly",False)
+
+	V.Local.sRet.Set("Needs Analysis*!*Proposal*!*Negotiation*!*Closed Won*!*Closed Lost")
+	gui.frrmHubspot.GsGridQuotes.ColumnEdit("GridView_Q","DealStage","Dropdownlist",V.Local.sRet)
+	
+'	V.Local.sRet.Set("Qualifying- Pending Sales*!*Development- Project in Engineering*!*New- Request for Quote*!*Engineerng- Waiting for vendor quote*!*Custom Quote in Process*!*Final Review*!*Released to Sales*!*Sent to Customer")
+'	gui.frrmHubspot.GsGridQuotes.ColumnEdit("GridView_Q","RFQStage","Dropdownlist",V.Local.sRet)
+	
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","RFQStage","AllowEdit",True)
+'	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","RFQStage","ReadOnly",False)
+
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealStage","AllowEdit",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","DealStage","ReadOnly",False)
+
+	gui.frrmHubspot.GsGridQuotes.SetGridViewProperty("GridView_Q","OptionsViewShowAutoFilterRow",True)
+	gui.frrmHubspot.GsGridQuotes.SetGridViewProperty("GridView_Q","showgrouppanel",True)
+	gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q", "CreateDate", "DisplayCustomDatetime", "d")
+	'gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q", "QuoteNeededDate", "DisplayCustomDatetime", "d")
+	gui.frrmHubspot.GsGridQuotes.SetGridViewProperty("GridView_Q", "OptionsSelectionEnableAppearanceFocusedRow", "true") 
+	Gui.frrmHubspot.GsGridQuotes.SetColumnProperty("GridView_Q","Amount","DisplayCustomNumeric","#,##0.00")
+	
+'	f.Intrinsic.Control.CallSub(SetDealValue,"DTName","DTQuote","DVName","DVQuote")
+	gui.frrmHubspot.GsGridQuotes.SetGridViewProperty("GridView_Q","OptionsViewColumnAutoWidth",False)
+	gui.frrmHubspot.GsGridQuotes.bestfitcolumns("GridView_Q")
+	gui.frrmHubspot.GsGridQuotes.ResumeLayout
+	gui.frrmHubspot.GsGridQuotes.MainView("GridView_Q")
+	
+f.Intrinsic.Control.endif
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.LoadData_Quote.End
+
+Program.Sub.Serialize.Start
+f.Intrinsic.Control.Try
+V.Local.sSerialize.Declare 
+
+gui.frrmHubspot.GsGridQuotes.Serialize("GridView_Q",V.Local.sSerialize)
+F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GridView_Q",5856,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,V.Local.sSerialize)
+
+'gui.frrmHubspot.GsGridCSR.Serialize("GridView",V.Local.sSerialize)
+F.Global.Registry.AddValue(V.Caller.User,V.Caller.CompanyCode,"GridView",5856,1000,False,"Serialize",False,0,-999.0,1/1/1980,12:00:00 AM,V.Local.sSerialize)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.If(v.Ambient.ErrorNumber,<>,121000)  'GsGridControl Error: Serialization Error: The given key was not present in the dictionary.
+		f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.Endif
+f.Intrinsic.Control.EndTry
+Program.Sub.Serialize.End
+
+Program.Sub.Deserialize.Start
+f.Intrinsic.Control.Try
+V.Local.sSerialize.Declare 
+
+F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GridView_Q",5856,1000,6,"",V.Local.sSerialize)
+F.Intrinsic.Control.If(V.Local.sSerialize.trim,<>,"")
+	gui.frrmHubspot.GsGridQuotes.Deserialize(V.Local.sSerialize)
+F.Intrinsic.Control.EndIf
+
+F.Global.Registry.ReadValue(V.Caller.User,V.Caller.CompanyCode,"GridView",5856,1000,6,"",V.Local.sSerialize)
+F.Intrinsic.Control.If(V.Local.sSerialize.trim,<>,"")
+'	gui.frrmHubspot.GsGridCSR.Deserialize(V.Local.sSerialize)
+F.Intrinsic.Control.EndIf
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Deserialize.End
+
+Program.Sub.frrmHubspot_UnLoad.Start
+f.Intrinsic.Control.Try
+f.Intrinsic.Control.CallSub(serialize)
+
+f.Intrinsic.Control.If(v.DataTable.DTQuote.Exists,=,True)
+	'f.Data.DataTable.Close("DTCSR")
+	f.Data.DataTable.Close("DTQuote")
+	f.Data.DataTable.Close("DTCmpyAddress")
+f.Intrinsic.Control.endif
+
+f.Intrinsic.Control.If(v.ODBC.conx.exists,=,1)
+	f.ODBC.Connection!conx.Close
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.End
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.frrmHubspot_UnLoad.End
+Program.Sub.Load_Excel.Start
+V.Local.sFile.Declare
+V.Local.sRow.Declare
+V.Local.sRet.Declare
+V.Local.sFieldNames.Declare
+V.Local.sTypes.Declare
+
+Function.Automation.MSExcel.CreateAppObject("EXCEL")
+Function.Automation.MSExcel.OpenWorkbook("EXCEL","BOOK",V.Local.sFile)
+Function.Automation.MSExcel.OpenWorksheet("BOOK","SHEET",1)
+F.Automation.MSExcel.ReadSpreadsheet(V.Local.sFile,15,,V.Local.sRow)
+
+F.Intrinsic.String.Split(V.Local.sRow,"&^&",V.Local.sRet)
+F.Data.DataTable.CreateFromString("Import1",V.Local.sRet,V.Local.sFieldNames,V.Local.sTypes,"*!*","$!$",True)
+
+F.Automation.Generic.DestroyObject("SHEET")
+F.Automation.Generic.DestroyObject("BOOK")
+F.Automation.Generic.DestroyObject("EXCEL")
+
+
+Program.Sub.Load_Excel.End
+
+Program.Sub.GsGridCSR_RowCellClick.Start
+f.Intrinsic.Control.Try
+'v.Local.iCol.Declare
+'v.Local.sVal.Declare
+
+v.Local.sSQL.Declare
+v.Local.lRet.Declare
+v.Local.sDate.Declare
+v.Local.sTime.Declare
+v.local.sfrmomemail.Declare
+v.local.sReqType.Declare
+v.Local.sCID.Declare
+v.Local.sParts.Declare
+v.Local.sFax.Declare
+v.Local.sCustomer.Declare
+v.Local.sNewCSRNo.Declare
+v.Local.sContName.Declare
+v.Local.sCustomerName.Declare
+v.Local.sContactPhone.Declare
+V.Local.sRet.Declare
+V.Local.sParams.Declare
+v.Local.sCont.Declare
+v.local.iRet.Declare
+v.local.sCustPO.Declare
+v.local.sFilter.Declare
+v.Local.iCol.Declare
+v.Local.sCmpyID.Declare
+v.Local.sDealId.Declare
+v.Local.sfname.Declare
+v.Local.slName.Declare
+v.Local.sAddlInfo.Declare
+v.Local.sSALESREP.Declare
+
+
+'https://app.hubspot.com/contacts/5530045/deal/1075710681/
+F.Intrinsic.Control.if(V.Args.column.UCase,=,"DEALID")
+	Function.Intrinsic.UI.MsgBox("Do you want to view Deals from Hubspot website ?", "Confirm", 4,v.local.iRet)
+	F.Intrinsic.Control.If(v.local.iRet,=,6)
+		Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","DealID",V.Args.RowIndex,v.Local.sDealId)
+		
+		f.Intrinsic.String.Build("https://app.hubspot.com/contacts/{1}/deal/{0}",v.Local.sDealId,v.Global.sFileContents(0),V.Local.sRet)
+		F.Intrinsic.Task.ShellExec(V.Caller.Handle,"OPEN",V.Local.sRet,"","",5)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.elseif(V.Args.column.UCase,=,"GSS_CUSTOMER")
+'	v.Local.sCustomer.Set(V.DataView.DTCSR!DVCSR(v.Args.RowHandle).GSS_CUSTOMER!Fieldval)
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+	F.Intrinsic.Control.If(v.Local.sCustomer.Trim,=,"")
+		gui.frrmHubspot.GsGridCSR.Enabled(false)
+		Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","AssociatedCompanyIds1",V.Args.RowIndex,v.Local.sCmpyID)
+		f.Intrinsic.Control.CallSub("Temp_Filewrite","CmpID",v.Local.sCmpyID,"DTName","DTCmpyAddress")
+		F.Intrinsic.String.ConcatCallWrapperArgs("N","*!*ZDR*!*","",V.Local.sParams)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.ConcatCallWrapperArgs("O","*!*ZDR*!*",V.Local.sCustomer,V.Local.sParams)
+	F.Intrinsic.Control.EndIf
+	F.Global.General.CallWrapperSync(100000,V.Local.sParams)
+	gui.frrmHubspot.GsGridCSR.Enabled(true)
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"GSS_CONTACT")
+'	v.Local.sCustomer.Set(V.DataView.DTCSR!DVCSR(v.Args.RowHandle).GSS_CUSTOMER!Fieldval)
+'	v.Local.sCont.Set(V.DataView.DTCSR!DVCSR(v.Args.RowHandle).GSS_CONTACT!Fieldval)
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CONTACT",V.Args.RowIndex,v.Local.sCont)
+	F.Intrinsic.Control.If(v.Local.sCont.Trim,=,"")
+	F.Intrinsic.Control.AndIf(v.Local.sCustomer.Trim,<>,"")
+		Function.Intrinsic.UI.MsgBox("Do you want to create Contact?", "Confirm", 4,v.local.iRet)
+		F.Intrinsic.Control.If(v.local.iRet,=,6)
+			f.Intrinsic.UI.InvokeWaitDialog("Creating Contact")
+			gui.frrmHubspot.GsGridCSR.Enabled(false)
+			
+			f.Intrinsic.Control.CallSub(Create_Contact,"currRow",v.Args.RowIndex,"DTName","DTCSR","DVName","DVCSR")
+			
+'			Function.ODBC.Connection!Conx.GetID("CRM_UF_VALUE","CID",False,v.Local.lRet)
+			Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","CID",V.Args.RowIndex,v.Local.sCID)
+			F.Intrinsic.String.Build("SELECT top 1 CID FROM CRM_UF_VALUE WHERE  UF16 = '{0}'",v.Local.sCID,V.Local.sSQL)
+			Function.ODBC.Connection!conx.ExecuteAndReturn(V.Local.sSQL,V.Local.sRet)  'get contactID
+			f.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+'				f.Data.DataView.SetValue("DTCSR","DVCSR",V.Args.RowIndex,"GSS_CONTACT",V.Local.sRet)
+				Gui.frrmHubspot.GsGridCSR.SetCellValueByColumnName("GridView","GSS_CONTACT",V.Args.RowIndex,V.Local.sRet)
+				'f.data.Datatable.AcceptChanges("DTCSR")
+			f.Intrinsic.Control.endif	
+			gui.frrmHubspot.GsGridCSR.Enabled(True)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+'			f.Intrinsic.Control.CallSub(Create_Contact,"currRow",v.Args.RowIndex)
+'			Function.ODBC.Connection!Conx.GetID("CRM_UF_VALUE","CID",False,v.Local.lRet)
+'			f.Data.DataView.SetValue("DealbyID","DVCSR",V.Args.RowIndex,"GSS_CONTACT",v.Local.lRet)
+'			f.data.Datatable.AcceptChanges("DealbyID")
+'			gui.frrmHubspot.GsGrid.Enabled(true)
+'		F.Intrinsic.Control.EndIf
+'	F.Intrinsic.Control.EndIf
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"GSSCONT_BROWSE")
+	V.Local.sTitles.Declare
+	V.Local.iWidths.Declare
+	V.Local.sQuery.Declare
+
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","AssociatedVids1",V.Args.RowIndex,v.Local.sCmpyID)
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+
+	F.Intrinsic.String.Split("Customer*!*Contact Name*!*Email*!*ALTID*!*Phone","*!*",V.Local.sTitles)
+	F.Intrinsic.String.Split("1200*!*1800*!*1800*!*1200*!*1200","*!*",V.Local.iWidths)
+	F.Intrinsic.String.Build("select Cust,Name,email1,Alt_ID,PHONE1 from contact where Cust = '{0}' ",v.Local.sCustomer,V.Local.sQuery)
+	F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+	
+	F.Intrinsic.UI.Browser("Select a Contact","conx",V.Local.sQuery,V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+'		f.Intrinsic.Control.CallSub(Contact_USRFLD,"CID",V.Local.sRet(3).long,"COMPID",v.Local.sCustomer,"HUBCOMPID",v.Local.sCmpyID)
+		Gui.frrmHubspot.GsGridCSR.SetCellValueByColumnName("GridView","GSS_CONTACT",V.Args.RowIndex,V.Local.sRet(3))
+		Gui.frrmHubspot.GsGridCSR.SetCellValueByColumnName("GridView","PhoneNumber",V.Args.RowIndex,V.Local.sRet(4))
+	F.Intrinsic.Control.EndIf
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"GSSCUST_BROWSE")
+
+'	v.Local.sCustomer.Set(V.DataView.DTCSR!DVCSR(v.Args.RowHandle).GSS_CUSTOMER!Fieldval)
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+	F.Intrinsic.Control.If(v.Local.sCustomer.Trim,=,"")
+		F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+		F.Intrinsic.UI.Browser(205,"",V.Local.sRet)
+		F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+
+'			v.Local.sCmpyID.Set(V.DataView.DTCSR!DVCSR(v.Args.RowHandle).AssociatedCompanyIds1!Fieldval)
+			Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","AssociatedCompanyIds1",V.Args.RowIndex,v.Local.sCmpyID)
+			f.Intrinsic.String.Build("AssociatedCompanyIds1='{0}'",V.Local.sCmpyID,v.local.sFilter)
+			
+'			f.Intrinsic.UI.Msgbox(v.local.sFilter)
+'			Function.Intrinsic.Debug.InvokeDebugger
+'			Function.Intrinsic.Debug.Stop
+			f.Data.DataView.SetFilter("DTCSR","DVCSR",v.local.sFilter)
+			f.Data.DataView.SetValue("DTCSR","DVCSR",-1,"GSS_Customer",V.Local.sRet(0).Trim)
+			f.Data.DataView.SetFilter("DTQuote","DVQuote",v.local.sFilter)
+			f.Data.DataView.SetValue("DTQuote","DVQuote",-1,"GSS_Customer",V.Local.sRet(0).Trim)
+			f.data.Datatable.AcceptChanges("DTCSR")
+			
+			f.Data.DataView.SetFilter("DTCSR","DVCSR","DealStage='Needs Analysis'")
+			f.Data.DataView.SetSort("DTCSR","DVCSR","AssociatedCompanyIds1 asc")
+			
+			f.Data.DataView.SetFilter("DTQuote","DVQuote","DealStage in ('Negotiation', 'Proposal')")
+			f.Data.DataView.SetSort("DTQuote","DVQuote","AssociatedCompanyIds1 asc")
+		
+			f.Intrinsic.String.Build("update v_CUST_FORM_INFO set external_id = '{0}' where Customer = '{1}'",v.Local.sCmpyID,V.Local.sRet(0),v.Local.sSQL)
+			f.ODBC.Connection!conx.execute(v.Local.sSQL)
+
+			gui.frrmHubspot.GsGridCSR.FocusCell("GridView",v.Args.RowIndex,2)
+			
+		Function.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"CREATECSR")
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CSRNO",V.Args.RowIndex,v.Local.sNewCSRNo)
+	f.Intrinsic.Control.If(v.Local.sNewCSRNo.trim,<>,"")
+		f.Intrinsic.Control.ExitSub
+	f.Intrinsic.Control.EndIf
+	
+'	v.Local.sCustomer.Set(V.DataView.DTCSR!DVCSR(v.Args.RowHandle).GSS_CUSTOMER!Fieldval)
+'	v.Local.sCont.Set(V.DataView.DTCSR!DVCSR(v.Args.RowHandle).GSS_CONTACT!Fieldval)
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+	Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CONTACT",V.Args.RowIndex,v.Local.sCont)
+	
+	F.Intrinsic.Control.If(v.Local.sCont.Trim,<>,"")
+	F.Intrinsic.Control.AndIf(v.Local.sCustomer.Trim,<>,"")
+		Function.Intrinsic.UI.MsgBox("Do you want to create CSR ?", "Confirm", 4,v.local.iRet)
+		F.Intrinsic.Control.If(v.local.iRet,=,6)
+			f.Intrinsic.Control.CallSub(CSR_TYPE)
+			F.Intrinsic.Control.If(v.Args.CSRType,=,"***CANCEL***")
+				Function.Intrinsic.UI.MsgBox("CSR Type is required field")
+			F.Intrinsic.Control.else
+				f.Intrinsic.UI.InvokeWaitDialog("Creating CSR")
+				gui.frrmHubspot.GsGridCSR.Enabled(false)
+			'	f.Intrinsic.Control.CallSub(Find_Customer,"currRow",V.Args.RowIndex)
+			'	f.Intrinsic.Control.If(v.Args.CustRet,=,"PHANTOM")
+			'		Function.ODBC.Connection!Conx.GetID("GCG_5857_Maint","Cust",False,v.Local.sCustomer)
+			'	f.Intrinsic.Control.Else
+			'		v.Local.sCustomer.Set(v.Args.CustRet)
+			'	f.Intrinsic.Control.EndIf
+				
+				Function.ODBC.Connection!Conx.GetID("CUST_SERV_REQ","Request_Number",True,v.Local.lRet)
+				f.Intrinsic.String.LPad(v.Local.lRet,"0",7,v.Local.sNewCSRNo)
+				
+				v.Local.sDate.Set(v.Ambient.Date.Formatyyyymmdd)
+				v.Local.sTime.Set(v.Ambient.Time.FormatHHNNSS)
+				
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","CompanyName",V.Args.RowIndex,v.Local.sCustomerName)
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","Email",V.Args.RowIndex,v.Local.sfrmomemail)
+				
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","fname",V.Args.RowIndex,v.Local.sfname)
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","lname",V.Args.RowIndex,v.Local.slName)
+'	
+				f.Intrinsic.String.Build("{0} {1}",v.Local.sfname.Trim,v.Local.slName.trim,v.Local.sContName)
+
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","SALESPERSON",V.Args.RowIndex,v.Local.sSALESREP)
+				
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","PhoneNumber",V.Args.RowIndex,v.Local.sContactPhone)
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","CID",V.Args.RowIndex,v.Local.sCID)
+				
+				v.local.sReqType.Set(v.Args.CSRType)
+
+
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","FaxNumber",V.Args.RowIndex,v.Local.sFax)
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","DealId",V.Args.RowIndex,v.Local.sCustPO)
+				
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","AdditionalInformation",V.Args.RowIndex,v.Local.sAddlInfo)
+	
+			'	f.Intrinsic.Control.If(v.Args.bCnt,=,False)
+			'		'contact not exist. create contact
+			'		f.Intrinsic.Control.CallSub(Create_Contact,"currRow",V.Args.RowIndex,"Cust",v.Local.sCustomer)
+			'	f.Intrinsic.Control.EndIf
+	
+				F.Intrinsic.String.Replace(v.Local.sCustomerName,"'","''",v.Local.sCustomerName)
+				
+				f.Intrinsic.String.Build("Insert Into CUST_SERV_REQ(REQUEST_NUMBER,CUSTOMER,NAME,EMAIL,SUBJECT,REQ_TYPE,DATE_Entered,TIME_ENTERED,ENTERED_BY,Date_Last_Update,Time_Last_Update,Contact,Phone,Cust_PO,Part,fax)Values('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{6}','{7}','{9}','{10}','{11}','{12}','{13}')",v.Local.sNewCSRNo,v.Local.sCustomer,v.Local.sCustomerName,v.local.sfrmomemail,"",v.local.sReqType,v.Local.sDate,v.Local.sTime,v.Caller.User,v.Local.sContName,v.Local.sContactPhone,v.local.sCustPO,v.local.sParts,v.local.sFax,v.Local.sSQL)
+				f.ODBC.Connection!conx.execute(v.Local.sSQL)
+				F.Intrinsic.String.Replace(v.Local.sAddlInfo,"'","''",v.Local.sAddlInfo)
+				f.Intrinsic.String.Build("Insert Into CUST_SVC_RQ_NOTES Values('{0}','P','{1}','{2}','{3}','{4}')",v.Local.sNewCSRNo,v.Local.sDate,v.Local.sTime,v.Caller.User,v.Local.sAddlInfo,v.Local.sSQL)
+				f.ODBC.Connection!conx.execute(v.Local.sSQL)
+		
+				f.Intrinsic.UI.Msgbox("CSR created Successfully")
+
+				Gui.frrmHubspot.GsGridCSR.SetCellValueByColumnName("GridView","GSS_CSRNO",V.Args.RowIndex,v.Local.sNewCSRNo)
+				f.data.Datatable.AcceptChanges("DTCSR")
+	
+				Gui.frrmHubspot.GsGridCSR.GetCellValueByColumnName("GridView","DealId",V.Args.RowIndex,v.Local.sDealId)
+				f.Intrinsic.String.Build("UPDATE Deals set [CSR Number] = '{0}' where DealId = '{1}' ",v.Local.sNewCSRNo,v.Local.sDealId.trim,v.Local.sSql)
+				Function.Automation.Hubspot.ExecuteSQL(v.Local.sSQL)
+				f.Intrinsic.Control.CallSub(Email_Alert,"EMAILMODE","HUBCSR","CSRType",v.Args.CSRType,"CSRNO",v.Local.sNewCSRNo,"SALESREP",v.Local.sSALESREP)
+				
+				gui.frrmHubspot.GsGridCSR.Enabled(True)
+				f.Intrinsic.UI.CloseWaitDialog
+			f.Intrinsic.Control.EndIf 
+		f.Intrinsic.Control.EndIf 
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.UI.CloseWaitDialog
+	gui.frrmHubspot.GsGridCSR.Enabled(True)
+	
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.GsGridCSR_RowCellClick.End
+Program.Sub.GsGridQuotes_RowCellClick.Start
+f.Intrinsic.Control.Try
+'v.Local.iCol.Declare
+'v.Local.sVal.Declare
+
+v.Local.sSQL.Declare
+v.Local.lRet.Declare
+v.Local.sDate.Declare
+v.Local.sTime.Declare
+v.local.sfrmomemail.Declare
+v.local.sReqType.Declare
+v.Local.sCID.Declare
+v.Local.sParts.Declare
+v.Local.sFax.Declare
+v.Local.sCustomer.Declare
+v.Local.sNewCSRNo.Declare
+v.Local.sContName.Declare
+v.Local.sCustomerName.Declare
+v.Local.sContactPhone.Declare
+V.Local.sRet.Declare
+V.Local.sParams.Declare
+v.Local.sCont.Declare
+v.local.iRet.Declare
+v.local.sCustPO.Declare
+v.Local.sFilter.Declare
+v.Local.sDealId.Declare
+V.Local.sQO.Declare
+v.Local.sCmpyID.Declare
+v.Local.fExtension.Declare
+V.Local.sQuoteNo.Declare
+
+'f.Intrinsic.Control.BlockEvents 
+F.Intrinsic.Control.if(V.Args.column.UCase,=,"DEALID")
+	Function.Intrinsic.UI.MsgBox("Do you want to view Deals from Hubspot website ?", "Confirm", 4,v.local.iRet)
+	F.Intrinsic.Control.If(v.local.iRet,=,6)
+		Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","DEALID",V.Args.RowIndex,v.Local.sDealId)
+'		f.Intrinsic.String.Build("https://app.hubspot.com/contacts/5530045/deal/{0}",V.DataView.DTQuote!DVQuote(v.Args.RowHandle).DEALID!Fieldval,V.Local.sRet)
+		f.Intrinsic.String.Build("https://app.hubspot.com/contacts/{1}/deal/{0}",v.Local.sDealId,v.Global.sFileContents(0),V.Local.sRet)
+		F.Intrinsic.Task.ShellExec(V.Caller.Handle,"OPEN",V.Local.sRet,"","",5)
+	f.Intrinsic.Control.endif
+F.Intrinsic.Control.elseif(V.Args.column.UCase,=,"GSS_CUSTOMER")
+'	v.Local.sCustomer.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).GSS_CUSTOMER!Fieldval)	
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+	gui.frrmHubspot.GsGridQuotes.Enabled(false)
+	F.Intrinsic.Control.If(v.Local.sCustomer.Trim,=,"")
+		Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","AssociatedCompanyIds1",V.Args.RowIndex,v.Local.sCmpyID)
+'		f.Intrinsic.Control.CallSub("Temp_Filewrite","CmpID",V.DataView.DTQuote!DVQuote(v.Args.RowHandle).AssociatedCompanyIds1!Fieldval,"DTName","DTCmpyAddress")
+		f.Intrinsic.Control.CallSub("Temp_Filewrite","CmpID",v.Local.sCmpyID,"DTName","DTCmpyAddress")
+		F.Intrinsic.String.ConcatCallWrapperArgs("N","*!*ZDR*!*","",V.Local.sParams)
+	F.Intrinsic.Control.Else
+		F.Intrinsic.String.ConcatCallWrapperArgs("O","*!*ZDR*!*",V.Local.sCustomer,V.Local.sParams)
+	F.Intrinsic.Control.EndIf
+	F.Global.General.CallWrapperSync(100000,V.Local.sParams)
+	gui.frrmHubspot.GsGridQuotes.Enabled(true)
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"GSS_CONTACT")
+
+'	v.Local.sCustomer.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).GSS_CUSTOMER!Fieldval)
+'	v.Local.sCont.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).GSS_CONTACT!Fieldval)
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_CONTACT",V.Args.RowIndex,v.Local.sCont)
+	F.Intrinsic.Control.If(v.Local.sCont.Trim,=,"")
+	F.Intrinsic.Control.AndIf(v.Local.sCustomer.Trim,<>,"")
+		Function.Intrinsic.UI.MsgBox("Do you want to create Contact?", "Confirm", 4,v.local.iRet)
+		F.Intrinsic.Control.If(v.local.iRet,=,6)
+			f.Intrinsic.UI.InvokeWaitDialog("Creating Contact")
+			gui.frrmHubspot.GsGridQuotes.Enabled(false)
+			f.Intrinsic.Control.CallSub(Create_Contact,"currRow",v.Args.RowIndex,"DTName","dtQuote","DVName","DVQuote")
+			Function.ODBC.Connection!Conx.GetID("CRM_UF_VALUE","CID",False,v.Local.lRet)
+
+'			f.Data.DataView.SetValue("DTQuote","DVQuote",V.Args.RowHandle,"GSS_CONTACT",v.Local.lRet)
+			Gui.frrmHubspot.GsGridQuotes.SetCellValueByColumnName("GridView_Q","GSS_CONTACT",V.Args.RowIndex,v.Local.lRet) 
+			f.data.Datatable.AcceptChanges("dtQuote")
+			gui.frrmHubspot.GsGridQuotes.Enabled(True)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+	
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"GSSCONT_BROWSE")
+	V.Local.sTitles.Declare
+	V.Local.iWidths.Declare
+	V.Local.sQuery.Declare
+
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","AssociatedVids1",V.Args.RowIndex,v.Local.sCmpyID)
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+
+	F.Intrinsic.String.Split("Customer*!*Contact Name*!*Email*!*ALTID","*!*",V.Local.sTitles)
+	F.Intrinsic.String.Split("1200*!*1800*!*1800*!*1200","*!*",V.Local.iWidths)
+	F.Intrinsic.String.Build("select Cust,Name,email1,Alt_ID from contact where Cust = '{0}' ",v.Local.sCustomer,V.Local.sQuery)
+	F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+	
+	F.Intrinsic.UI.Browser("Select a Contact","conx",V.Local.sQuery,V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+	F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		f.Intrinsic.Control.CallSub(Contact_USRFLD,"CID",V.Local.sRet(3).long,"COMPID",v.Local.sCustomer,"HUBCOMPID",v.Local.sCmpyID)
+		Gui.frrmHubspot.GsGridQuotes.SetCellValueByColumnName("GridView_Q","GSS_CONTACT",V.Args.RowIndex,V.Local.sRet(3)) 
+	F.Intrinsic.Control.EndIf
+		
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"GSSCUST_BROWSE")
+'	v.Local.sCustomer.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).GSS_CUSTOMER!Fieldval)
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+	
+	F.Intrinsic.Control.If(v.Local.sCustomer.Trim,=,"")
+		F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+		F.Intrinsic.UI.Browser(205,"",V.Local.sRet)
+		F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+			F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+			'Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","AssociatedVids1",V.Args.RowIndex,v.Local.sCmpyID)
+			F.Data.DataTable.SetValue("DTQuote",V.Args.RowIndex,"GSS_Customer",V.Local.sRet(0).Trim)
+			'f.Data.DataView.SetValue("DTQuote","DVQuote",V.Args.RowIndex,"GSS_Customer",V.Local.sRet(0).Trim)
+			'f.Data.DataTable.SetValue("DTQuote",V.Args.RowIndex,"GSS_Customer",V.Local.sRet(0).Trim)
+			f.data.Datatable.AcceptChanges("DTQuote")
+			
+			f.Intrinsic.String.Build("update v_CUST_FORM_INFO set external_id = '{0}' where Customer = '{1}'",v.DataTable.dtquote(v.Args.rowindex).AssociatedCompanyIDs1!FieldVal,V.Local.sRet(0),v.Local.sSQL)
+			f.ODBC.Connection!conx.execute(v.Local.sSQL)
+			
+			gui.frrmHubspot.GsGridQuotes.FocusCell("GridView_Q",v.Args.RowIndex,2)
+			
+'			v.Local.sCmpyID.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).AssociatedCompanyIds1!Fieldval)
+'			Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","AssociatedCompanyIds1",V.Args.RowIndex,v.Local.sCmpyID)
+'			f.Intrinsic.String.Build("AssociatedCompanyIds1='{0}'",V.Local.sCmpyID,v.local.sFilter)
+'			f.Data.DataView.SetFilter("DTCSR","DVCSR",v.local.sFilter)
+'			f.Data.DataView.SetValue("DTCSR","DVCSR",-1,"GSS_Customer",V.Local.sRet(0).Trim)
+'			f.Data.DataView.SetFilter("DTQuote","DVQuote",v.local.sFilter)
+'			f.Data.DataView.SetValue("DTQuote","DVQuote",-1,"GSS_Customer",V.Local.sRet(0).Trim)
+'			f.data.Datatable.AcceptChanges("DTCSR")
+			
+			'f.Data.DataView.SetFilter("DTCSR","DVCSR","DealStage_data='presentationscheduled'")
+			'f.Data.DataView.SetSort("DTCSR","DVCSR","AssociatedCompanyIds1 asc")
+			
+			'f.Data.DataView.SetFilter("DTQuote","DVQuote","DealStage_data='decisionmakerboughtin'")
+			'f.Data.DataView.SetSort("DTQuote","DVQuote","AssociatedCompanyIds1 asc")
+
+			'Reset cmpyid
+'			f.Intrinsic.String.Build("update v_CUST_FORM_INFO set external_id = '{0}' where Customer = '{1}'",v.Local.sCmpyID,V.Local.sRet(0),v.Local.sSQL)
+'			f.ODBC.Connection!conx.execute(v.Local.sSQL)
+
+			gui.frrmHubspot.GsGridQuotes.FocusCell("GridView_Q",v.Args.RowIndex,2)
+			
+		Function.Intrinsic.Control.EndIf
+	Function.Intrinsic.Control.EndIf
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"GSS_QUOTENO")
+
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_QuoteNo",V.Args.RowIndex,v.Local.sQuoteNo)
+'	V.Local.sQO.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).GSS_QuoteNo!Fieldval)
+	F.Intrinsic.Control.If(v.Local.sQuoteNo.Trim,<>,"")
+		gui.frrmHubspot.GsGridQuotes.Enabled(false)
+		F.Intrinsic.String.Build("{0}!*!O",V.Local.sQuoteNo,V.Local.sQO)	
+		f.Intrinsic.UI.InvokeWaitDialog("Opening Screen")
+		F.Global.General.CallWrappersync(251000,V.Local.sQO)
+		'Update the amount once the quote is finished being edited
+		f.Intrinsic.Control.If(v.Caller.User,=,"SUPERVSR")
+			
+		f.Intrinsic.Control.EndIf
+		f.Intrinsic.String.Build("select sum(extension) as Price from v_quote_lines where quote_no='{0}'",v.Local.sQuoteNo,v.Local.sSQL)
+		F.ODBC.Connection!CON.OPENCOMPANYCONNECTION(500)
+			f.ODBC.Connection!con.ExecuteAndReturn(v.Local.sSQL,v.Local.fExtension)
+		F.ODBC.Connection!CON.Close
+		gui.frrmHubspot.GsGridQuotes.SetCellValueByColumnName("GridView_Q","AMOUNT",v.Args.rowindex,v.Local.fExtension)
+		f.Intrinsic.UI.CloseWaitDialog
+		gui.frrmHubspot.GsGridQuotes.Enabled(True)
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"CREATEQUOTE")
+	
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_QuoteNo",V.Args.RowIndex,v.Local.sQO)
+	f.Intrinsic.Control.If(v.Local.sQO.Trim,<>,"")
+		f.Intrinsic.Control.unBlockEvents 
+		f.Intrinsic.Control.ExitSub
+	f.Intrinsic.Control.EndIf
+	
+'	v.Local.sCustomer.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).GSS_CUSTOMER!Fieldval)
+'	v.Local.sCont.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).GSS_CONTACT!Fieldval)
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_CUSTOMER",V.Args.RowIndex,v.Local.sCustomer)
+	Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_CONTACT",V.Args.RowIndex,v.Local.sCont)
+	F.Intrinsic.Control.If(v.Local.sCont.Trim,<>,"")
+	F.Intrinsic.Control.AndIf(v.Local.sCustomer.Trim,<>,"")
+		Function.Intrinsic.UI.MsgBox("Do you want to create Quote ?", "Confirm", 4,v.local.iRet)
+		F.Intrinsic.Control.If(v.local.iRet,=,6)
+			f.Intrinsic.UI.InvokeWaitDialog("Creating Quote")
+			gui.frrmHubspot.GsGridQuotes.Enabled(false)
+'			Function.ODBC.Connection!Conx.GetID("CUST_SERV_REQ","Request_Number",True,v.Local.lRet)
+'			f.Intrinsic.String.LPad(v.Local.lRet,"0",7,v.Local.sNewCSRNo)
+'			
+'			v.Local.sDate.Set(v.Ambient.Date.Formatyyyymmdd)
+'			v.Local.sTime.Set(v.Ambient.Time.FormatHHNNSS)
+			
+'			v.Local.sCustomerName.Set(V.DataView.DealIDQuote!DVQuote(v.Args.RowIndex).CompanyName!Fieldvaltrim)
+'			v.Local.sCustomer.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).GSS_CUSTOMER!Fieldvaltrim)
+'			v.Local.sDealId.Set(V.DataView.DTQuote!DVQuote(v.Args.RowHandle).DealID!Fieldvaltrim)
+			Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","DealID",V.Args.RowIndex,v.Local.sDealId)
+
+			'add dummy part
+				Function.ODBC.Connection!conx.ExecuteAndReturn("select top 1 Part from Inventory_mstr  where location = ''",V.Local.sRet)  'get contactID
+				f.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+					f.Intrinsic.String.Build("{0}*!*{1}*!*1*!*{2}",v.Local.sCustomer,V.Local.sRet,v.Local.sDealId,V.Local.sRet)
+					'f.Intrinsic.String.Build("{0}*!*110013*!*1*!*{1}",v.Local.sCustomer,v.Local.sDealId,V.Local.sRet)
+					'f.Intrinsic.String.Build("{0}*!*0025*!*1*!*{1}",v.Local.sCustomer,v.Local.sDealId,V.Local.sRet)
+				f.Intrinsic.Control.Else
+					f.Intrinsic.String.Build("{0}*!*110013*!*1*!*{1}",v.Local.sCustomer,v.Local.sDealId,V.Local.sRet)
+				f.Intrinsic.Control.endif	
+
+				F.Intrinsic.Variable.LoadUDTFromString(V.uGlobal.uOrders,"Customer*!*Part*!*Qty_Order*!*Header_User5",V.Local.sRet,"@!@","*!*",False)
+				'Call the sub and create the Quote.
+				F.Intrinsic.Control.CallSub(ORDUPLUpload)
+'				F.Intrinsic.UI.Sleep(5)	
+				
+				F.Intrinsic.String.Build("SELECT Quote_No FROM v_Quote_Header WHERE  USER_5 = '{0}' order by Quote_No desc ",v.Local.sDealId,V.Local.sSQL)
+'				F.Intrinsic.UI.Sleep(5)	
+				F.ODBC.Connection!Conx.OpenLocalRecordsetRO("rst",V.Local.sSQL)
+				F.Intrinsic.Control.If(V.ODBC.Conx!rst.EOF,=,False)
+					F.Intrinsic.String.Build("delete from Quote_Header  WHERE  Quote_NO = '{0}' and Record_Type = 'L'",V.ODBC.Conx!rst.FieldVal!Quote_No,V.Local.sSQL)
+					f.ODBC.Connection!conx.execute(v.Local.sSQL)
+					F.Intrinsic.String.Build("Update Quote_Header set last_rec_no = 0 from Quote_Header  WHERE  Quote_NO = '{0}' and Record_Type = 'A'",V.ODBC.Conx!rst.FieldVal!Quote_No,V.Local.sSQL)
+					f.ODBC.Connection!conx.execute(v.Local.sSQL)
+'					f.Data.DataView.SetValue("DTQuote","DVQuote",V.Args.RowHandle,"GSS_QuoteNo",V.ODBC.Conx!rst.FieldValTrim!Quote_No)
+					Gui.frrmHubspot.GsGridQuotes.SetCellValueByColumnName("GridView_Q","GSS_QuoteNo",V.Args.RowIndex,V.ODBC.Conx!rst.FieldValTrim!Quote_No)
+					f.data.Datatable.AcceptChanges("DTQuote")
+					'f.Intrinsic.String.Build("UPDATE Deals set [Quote Number] = {0} where DealId = '{1}' ",V.ODBC.Conx!rst.FieldValTrim!Quote_No,v.Local.sDealId,v.Local.sSql)
+					'Function.Automation.Hubspot.ExecuteSQL(v.Local.sSQL)
+				f.Intrinsic.Control.endif
+				F.ODBC.Conx!rst.Close
+				gui.frrmHubspot.GsGridQuotes.Enabled(True)
+				f.Intrinsic.UI.CloseWaitDialog
+		f.Intrinsic.Control.EndIf 
+	f.Intrinsic.Control.Else
+		f.Intrinsic.UI.Msgbox("The deal must have a GSS customer ID and contact ID assigned before the quote can be completed.","Quote Validation Error")
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.unBlockEvents 
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.unBlockEvents 
+	f.Intrinsic.UI.CloseWaitDialog
+	gui.frrmHubspot.GsGridQuotes.Enabled(True)
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.GsGridQuotes_RowCellClick.End
+
+Program.Sub.GsGridQuotes_CellValueChanged.Start
+f.Intrinsic.Control.Try
+v.Local.iCol.Declare
+v.Local.sVal.Declare
+v.Local.sDealID.Declare
+v.Local.sNewVal.Declare
+v.Local.sSql.Declare
+
+
+f.Intrinsic.Control.If(V.Args.column.UCase,=,"DEALSTAGE")
+
+	gui.frrmHubspot.GsGridQuotes.GetColumnIndexByName("GridView_Q","DEALSTAGE",v.Local.iCol)
+	gui.frrmHubspot.GsGridQuotes.GetCellValue("GridView_Q",v.Local.iCol,V.Args.RowIndex,V.Local.sVal)
+	
+	Function.Intrinsic.Control.SelectCase(V.Local.sVal)
+	
+	Function.Intrinsic.Control.Case("Needs Analysis")
+		v.Local.sNewVal.Set("b25cb1a9-99ce-45e2-9981-3994ae21a874")
+	Function.Intrinsic.Control.Case("Proposal")
+		v.Local.sNewVal.Set("222093f5-faf2-4d09-b094-d6b515e7c60a")
+	Function.Intrinsic.Control.Case("Negotiation")
+		v.Local.sNewVal.Set("50e71897-bf57-49fc-9d06-d21335455424")
+	Function.Intrinsic.Control.Case("Closed Won")
+		v.Local.sNewVal.Set("a3267d5e-c202-4eb4-8c93-f0b2f6546be4")
+	Function.Intrinsic.Control.Case("Closed Lost")
+		v.Local.sNewVal.Set("ca024ba7-9f0e-4948-8d2a-00ae8403cc7a")
+	Function.Intrinsic.Control.EndSelect
+	
+'	f.Data.DataView.SetValue("DealbyID","DVPAY",V.Args.RowIndex,"DealStage_data",v.Local.sNewVal)
+	
+	gui.frrmHubspot.GsGridQuotes.GetColumnIndexByName("GridView_Q","DealStage_data",v.Local.iCol)
+	gui.frrmHubspot.GsGridQuotes.SetCellValue("GridView_Q",v.Local.iCol,V.Args.RowIndex,V.Local.sNewVal)
+	
+	gui.frrmHubspot.GsGridQuotes.GetColumnIndexByName("GridView_Q","DealId",v.Local.iCol)
+	gui.frrmHubspot.GsGridQuotes.GetCellValue("GridView_Q",v.Local.iCol,V.Args.RowIndex,V.Local.sDealID)
+	
+	'f.Intrinsic.UI.Msgbox(V.Local.sVal)
+'	Gui.frrmHubspot.GsGridQuotes.FocusCell("GridView_Q",V.Args.RowIndex,1)
+	
+	f.Intrinsic.String.Build("UPDATE Deals set {0}Deal Stage{0} = '{1}' where DealId = '{2}' ",v.Ambient.DblQuote,v.Local.sNewVal,V.Local.sDealID,v.Local.sSql)
+	Function.Automation.Hubspot.ExecuteSQL(v.Local.sSQL)
+	
+'!!!!!!!!!!!!Rome is not using RFQ Stages at this time.
+'f.Intrinsic.Control.elseIf(V.Args.column.UCase,=,"RFQSTAGE")	
+''		v.Local.sNewVal.Set(V.DataView.DealIDQuote!DVQuote(v.Args.RowIndex).RFQSTAGE!Fieldval)
+'		Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","RFQSTAGE",V.Args.RowIndex,v.Local.sNewVal)
+''		v.Local.sDealId.Set(V.DataView.DealIDQuote!DVQuote(v.Args.RowIndex).DealID!Fieldvaltrim)
+'		gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","DealId",V.Args.RowIndex,V.Local.sDealID)
+
+'		f.Intrinsic.String.Build("UPDATE Deals set [RFQ Stage] = '{0}' where DealId = '{1}' ",V.Local.sNewVal,v.Local.sDealId,v.Local.sSql)
+'		Function.Automation.Hubspot.ExecuteSQL(v.Local.sSQL)
+'		v.Local.sBody.Declare
+'		v.Local.sQuoteNo.Declare
+'		v.Local.sCompany.Declare
+'		
+'		Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","GSS_QUOTENO",V.Args.RowIndex,v.Local.sQuoteNo)
+'		Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","CompanyName",V.Args.RowIndex,v.Local.sCompany)
+'		f.Intrinsic.String.Build("ACCT:{0}{1}QUOTENO:{2}{1}RFQSTAGE:{3}",v.Local.sCompany,v.Ambient.NewLine,v.Local.sQuoteNo,v.Local.sNewVal,v.Local.sBody)
+'		Gui.frrmHubspot.GsGridQuotes.GetCellValueByColumnName("GridView_Q","Email",V.Args.RowIndex,v.Local.sVal)
+'		f.Intrinsic.Control.CallSub(Email_Alert,"EmailMode","RFQ","AcctBody",v.Local.sBody,"Email",v.Local.sVal)
+f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.GsGridQuotes_CellValueChanged.End
+
+Program.Sub.SetDealValue.Start
+f.Intrinsic.Control.Try
+V.Local.i.Declare
+V.Local.sVal.Declare
+
+F.Intrinsic.Control.For(V.Local.i,0,v.DataView.[v.Args.DTName]![v.Args.DVName].RowCount--,1)
+	Function.Intrinsic.Control.SelectCase(V.DataView.[v.Args.DTName]![v.Args.DVName](v.Local.i).DealStage_data!Fieldvaltrim)
+	
+	Function.Intrinsic.Control.Case("appointmentscheduled")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","PROSPECT")
+	Function.Intrinsic.Control.Case("1142355")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","CONTACTED")
+	Function.Intrinsic.Control.Case("qualifiedtobuy")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","QUALIFIED / ESTIMATE")
+	Function.Intrinsic.Control.Case("presentationscheduled")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","DEMO / SAMPLES")
+	Function.Intrinsic.Control.Case("decisionmakerboughtin")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","QUOTE")
+	Function.Intrinsic.Control.Case("654029")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","PENDING")
+	Function.Intrinsic.Control.Case("closedwon")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","CLOSED WON")
+	Function.Intrinsic.Control.Case("closedlost")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","CLOSED LOST")
+	Function.Intrinsic.Control.Case("735523")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","NOT READY TO BUY")
+	Function.Intrinsic.Control.Case("866803")
+		f.Data.DataView.SetValue(v.Args.DTName,v.Args.DVName,V.Local.i,"DealStage","UNQUALIFIED")
+	Function.Intrinsic.Control.EndSelect
+f.Intrinsic.Control.Next(V.Local.i)
+f.data.Datatable.AcceptChanges(v.Args.DTName)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.SetDealValue.End
+
+Program.Sub.GsGridCSR_CellValueChanged.Start
+f.Intrinsic.Control.Try
+v.Local.iCol.Declare
+v.Local.sVal.Declare
+v.Local.sDealID.Declare
+v.Local.sNewVal.Declare
+v.Local.sSql.Declare
+
+
+f.Intrinsic.Control.If(V.Args.column.UCase,=,"DEALSTAGE")
+
+	gui.frrmHubspot.GsGridCSR.GetColumnIndexByName("GridView","DEALSTAGE",v.Local.iCol)
+	gui.frrmHubspot.GsGridCSR.GetCellValue("GridView",v.Local.iCol,V.Args.RowIndex,V.Local.sVal)
+	
+	Function.Intrinsic.Control.SelectCase(V.Local.sVal)
+	
+	Function.Intrinsic.Control.Case("Needs Analysis")
+		v.Local.sNewVal.Set("b25cb1a9-99ce-45e2-9981-3994ae21a874")
+	Function.Intrinsic.Control.Case("Proposal")
+		v.Local.sNewVal.Set("222093f5-faf2-4d09-b094-d6b515e7c60a")
+	Function.Intrinsic.Control.Case("Negotiation")
+		v.Local.sNewVal.Set("50e71897-bf57-49fc-9d06-d21335455424")
+	Function.Intrinsic.Control.Case("Closed Won")
+		v.Local.sNewVal.Set("a3267d5e-c202-4eb4-8c93-f0b2f6546be4")
+	Function.Intrinsic.Control.Case("Closed Lost")
+		v.Local.sNewVal.Set("ca024ba7-9f0e-4948-8d2a-00ae8403cc7a")
+	Function.Intrinsic.Control.EndSelect
+	
+	gui.frrmHubspot.GsGridCSR.GetColumnIndexByName("GridView","DealStage_data",v.Local.iCol)
+	gui.frrmHubspot.GsGridCSR.SetCellValue("GridView",v.Local.iCol,V.Args.RowIndex,V.Local.sNewVal)
+	
+	gui.frrmHubspot.GsGridCSR.GetColumnIndexByName("GridView","DealId",v.Local.iCol)
+	gui.frrmHubspot.GsGridCSR.GetCellValue("GridView",v.Local.iCol,V.Args.RowIndex,V.Local.sDealID)
+	
+	f.Intrinsic.String.Build("UPDATE Deals set {0}Deal Stage{0} = '{1}' where DealId = '{2}' ",v.Ambient.DblQuote,v.Local.sNewVal,V.Local.sDealID,v.Local.sSql)
+	Function.Automation.Hubspot.ExecuteSQL(v.Local.sSQL)
+
+f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.GsGridCSR_CellValueChanged.End
+
+Program.Sub.Find_Customer.Start
+f.Intrinsic.Control.Try
+v.Local.sSQL.Declare
+v.Local.sCOVID.Declare
+v.Local.sDomain.Declare
+v.Local.sEmail.Declare
+v.Local.sCustomer.Declare
+
+
+v.Local.sEmail.Set(V.DataView.DealbyID!DVPAY(v.Args.currRow).Email!Fieldvaltrim)
+v.Local.sDomain.set(V.DataView.DealbyID!DVPAY(v.Args.currRow).EmailDomain!Fieldvaltrim)
+v.Local.sCOVID.Set(V.DataView.DealbyID!DVPAY(v.Args.currRow).CID!Fieldval)
+
+f.Intrinsic.String.Build("select Cust  from CONTACT where USER_1 = '{0}'",v.Local.sCOVID,v.Local.sSQL)
+F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)
+	F.ODBC.conx!rst.Close
+	f.Intrinsic.String.Build("select Cust from CONTACT where Email1 = '{0}'",v.Local.sEmail,v.Local.sSQL)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)	
+		F.ODBC.conx!rst.Close
+		f.Intrinsic.String.Build("select Cust from CONTACT where Email1 like '%{0}'",v.Local.sDomain,v.Local.sSQL)
+		F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+		f.Intrinsic.Variable.AddRV("bCnt",False)
+		F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)	
+			'dummy customer
+			v.Local.sCustomer.Set("PHANTOM")
+		f.Intrinsic.Control.else
+			v.Local.sCustomer.Set(v.ODBC.conx!rst.FieldVal!Cust)
+		f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.Else
+		v.Local.sCustomer.Set(v.ODBC.conx!rst.FieldVal!Cust)
+		f.Intrinsic.Variable.AddRV("bCnt",True)
+	F.Intrinsic.Control.EndIf
+f.Intrinsic.Control.Else
+	v.Local.sCustomer.Set(v.ODBC.conx!rst.FieldVal!Cust)
+	f.Intrinsic.Variable.AddRV("bCnt",True)
+F.Intrinsic.Control.EndIf	
+F.ODBC.conx!rst.Close
+
+f.Intrinsic.Variable.AddRV("CustRet",v.Local.sCustomer)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry	
+Program.Sub.Find_Customer.End
+
+Program.Sub.Create_Contact.Start
+f.Intrinsic.Control.Try
+v.Local.sfname.declare
+v.Local.slname.declare
+v.Local.sCompanyName.declare
+v.Local.sJobTitle.declare
+v.Local.sStreetAddress.declare
+v.Local.sStateProvince.declare
+v.Local.sCity.declare
+v.Local.sPostalCode.declare
+v.Local.sCountry.declare
+v.Local.sMobilePhoneNumber.declare
+v.Local.sPhoneNumber.declare
+v.Local.sFaxNumber.declare
+v.Local.sEmail.declare
+v.Local.sContact_Name.Declare
+V.Local.sTemp.Declare
+V.Local.iLengthArrayADD.Declare
+V.Local.sElements1.Declare
+V.Local.sRet.Declare
+V.Local.sFullString.Declare
+V.Local.sRetADD.Declare
+V.Local.sTempADD.Declare
+V.Local.sFile.Declare
+V.Local.sParams.Declare
+V.Local.bEx.Declare
+V.Local.sFullStringADD.Declare
+V.Local.sLenAdd.Declare
+V.Local.sUser16.Declare
+v.Local.sCustomer.Declare
+V.Local.sLen.Declare
+V.Local.sElementsAdd.declare
+V.LOCAL.ILENGTHARRAY.Declare
+v.Local.sCRLF.Declare
+
+'ADD Hook 45619 to upload Userfields to CRM_UF_Value
+'Script PPT_Contact_Upload.gas should be on hook 45619
+
+
+F.Intrinsic.UI.InvokeWaitDialog("Uploading...Data, Please Wait...")
+
+'v.Local.sCustomer.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).GSS_CUSTOMER!Fieldvaltrim)
+'v.Local.sfname.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).fname!Fieldvaltrim)
+'v.Local.slname.set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).lname!Fieldvaltrim)
+'f.Intrinsic.String.Build("{0} {1}",v.Local.sfname,v.Local.slname,v.Local.sContact_Name)
+'v.Local.sCompanyName.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).CompanyName!Fieldval)
+'v.Local.sJobTitle.set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).JobTitle!Fieldvaltrim)
+'v.Local.sStreetAddress.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).StreetAddress!Fieldval)
+'v.Local.sStateProvince.set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).StateTerritory!Fieldvaltrim)
+'v.Local.sCity.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).City!Fieldval)
+'v.Local.sPostalCode.set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).PostalCode!Fieldvaltrim)
+'v.Local.sCountry.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).Country!Fieldval)
+'v.Local.sMobilePhoneNumber.set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).MobilePhoneNumber!Fieldvaltrim)
+'v.Local.sPhoneNumber.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).PhoneNumber!Fieldval)
+'v.Local.sFaxNumber.set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).FaxNumber!Fieldvaltrim)
+'v.Local.sEmail.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).Email!Fieldval)
+'v.Local.sUser16.Set(V.DataView.[V.Args.DTName]![V.Args.DVName](v.Args.currRow).AssociatedVids1!Fieldval)
+
+v.Local.sCustomer.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).GSS_CUSTOMER!Fieldvaltrim)
+v.Local.sfname.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).fname!Fieldvaltrim)
+v.Local.slname.set(V.DataTable.[V.Args.DTName](v.Args.currRow).lname!Fieldvaltrim)
+f.Intrinsic.String.Build("{0} {1}",v.Local.sfname,v.Local.slname,v.Local.sContact_Name)
+v.Local.sCompanyName.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).CompanyName!Fieldval)
+v.Local.sJobTitle.set(V.DataTable.[V.Args.DTName](v.Args.currRow).JobTitle!Fieldvaltrim)
+v.Local.sStreetAddress.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).StreetAddress!Fieldval)
+v.Local.sStateProvince.set(V.DataTable.[V.Args.DTName](v.Args.currRow).StateTerritory!Fieldvaltrim)
+v.Local.sCity.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).City!Fieldval)
+v.Local.sPostalCode.set(V.DataTable.[V.Args.DTName](v.Args.currRow).PostalCode!Fieldvaltrim)
+v.Local.sCountry.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).Country!Fieldval)
+v.Local.sMobilePhoneNumber.set(V.DataTable.[V.Args.DTName](v.Args.currRow).MobilePhoneNumber!Fieldvaltrim)
+v.Local.sPhoneNumber.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).PhoneNumber!Fieldval)
+v.Local.sFaxNumber.set(V.DataTable.[V.Args.DTName](v.Args.currRow).FaxNumber!Fieldvaltrim)
+v.Local.sEmail.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).Email!Fieldval)
+v.Local.sUser16.Set(V.DataTable.[V.Args.DTName](v.Args.currRow).AssociatedVids1!Fieldval)
+
+	'contact
+'	V.Local.sLen.set("6*!*1*!*30*!*3*!*26*!*68*!*26*!*25*!*101*!*50*!*50*!*15*!*10*!*185*!*1*!*201*!*592*!*30*!*30*!*361")
+	V.Local.sLen.set("6*!*1*!*30*!*3*!*26*!*68*!*26*!*25*!*101*!*50*!*50*!*15*!*10*!*185*!*1*!*201*!*592*!*30*!*30*!*330*!*31")
+'	V.Local.sElements1.Set("CompanyName*!*contact_type*!*Contact_Name*!* *!*fname*!*lname*!*PhoneNumber*!* *!*Email*!*StreetAddress*!*Country*!*CITY*!*StateProvince*!*PostalCode*!* *!* *!*JobTitle*!* *!* *!*")
+	f.Intrinsic.String.Build("{0}*!*C*!*{1}*!* *!*{2}*!*{3}*!*{4}*!* *!*{5}*!*{6}*!*{7}*!*{8}*!*{9}*!*{10}*!* *!* *!*{11}*!* *!* *!* *!*{12}",v.Local.sCustomer,v.Local.sContact_Name,v.Local.sfname,v.Local.slname,v.Local.sPhoneNumber,v.Local.sEmail,v.Local.sStreetAddress,v.Local.sCountry,v.Local.sCity,v.Local.sStateProvince,v.Local.sPostalCode,v.Local.sJobTitle,v.Local.sUser16,V.Local.sElements1)
+
+'	f.Intrinsic.String.Replace(v.Local.sElements1,"\r\n","",v.Local.sElements1)
+	'Regex.Replace(input, "\r\n$", String.Empty)
+'	F.Intrinsic.String.Build("{0}{1}",V.ASCII.13,v.ASCII.10,v.Local.sCRLF)
+'	f.Intrinsic.String.Replace(v.Local.sElements1,v.Local.sCRLF,"",v.Local.sElements1)
+
+	'Replace linefeed
+	f.Intrinsic.String.Replace(v.Local.sElements1,v.ASCII.10,"",v.Local.sElements1)
+	F.Intrinsic.String.Split(V.Local.sElements1,v.Ambient.NewLine,V.Local.sElements1)
+	
+	F.Intrinsic.String.Split(V.Local.sLen,"*!*",V.Local.iLengthArray)
+	'additional address
+	V.Local.sLenAdd.set("6*!*6*!*30*!*150*!*15*!*2*!*13*!*163*!*13*!*86")
+'	V.Local.sElementsAdd.Set("Customer_Code*!*SEQ*!*Contact_Name*!*ADDRESS*!*CITY*!*STATE_PROVINCE*!*ZIP_CODE*!*COUNTRY*!*PHONE1*!*PHONE3")
+	f.Intrinsic.String.Build("{0}*!*' '*!*{1}*!*{2}*!*{3}*!*{4}*!*{5}*!*{6}*!*{7}*!*' '",v.Local.sCustomer,v.Local.sContact_Name,v.Local.sStreetAddress,v.Local.sCity,v.Local.sStateProvince,v.Local.sPostalCode,v.Local.sCountry,v.Local.sPhoneNumber,V.Local.sElementsAdd)
+	F.Intrinsic.String.Split(V.Local.sLenAdd,"*!*",V.Local.iLengthArrayADD)
+	V.Local.sTemp.Set(V.Local.sElements1)
+	F.Intrinsic.String.Split(V.Local.sTemp,"*!*",V.Local.sTemp)
+	F.Intrinsic.String.PositionalString(V.Local.sTemp,V.Local.iLengthArray,V.Local.sRet)
+	f.Intrinsic.String.Build("{0}{1}{2}",V.Local.sFullString,V.Local.sRet,V.Ambient.NewLine,V.Local.sFullString)
+	
+	f.Intrinsic.String.Replace(v.Local.sElementsAdd,v.ASCII.10,"",v.Local.sElementsAdd)
+	V.Local.sTempADD.Set(V.Local.sElementsAdd)
+	F.Intrinsic.String.Split(V.Local.sTempADD,"*!*",V.Local.sTempADD)
+	F.Intrinsic.String.PositionalString(V.Local.sTempADD,V.Local.iLengthArrayAdd,V.Local.sRetADD)
+	f.Intrinsic.String.Build("{0}{1}{2}",V.Local.sFullStringADD,V.Local.sRetADD,V.Ambient.NewLine,V.Local.sFullStringADD)
+
+	F.Intrinsic.Control.If(V.Local.sFullString.Trim,<>,"")
+		'does file exist?
+		F.Intrinsic.String.Build("{0}\CONTACT.TXT",V.Caller.FilesDir,V.Local.sFile)
+		F.Intrinsic.File.Exists(V.Local.sFile,V.Local.bEx)
+		Function.Intrinsic.Control.If(V.Local.bEx,=,True)
+			F.Intrinsic.File.DeleteFile(V.Local.sFile)
+		Function.Intrinsic.Control.EndIf
+	
+		F.Intrinsic.File.String2File(V.Local.sFile,V.Local.sFullString)
+		
+		F.Intrinsic.String.Build("{0}!*!UPLCNTCT/U",V.Caller.CompanyCode,V.Local.sParams)
+		'F.Intrinsic.String.Build("{0}!*!UPLCNTCT",V.Caller.CompanyCode,V.Local.sParams)
+		Function.Global.General.CallWrapperSync(51, V.Local.sParams)
+		
+		'Additional Shipto
+		F.Intrinsic.String.Build("{0}\SHIPTOIN.TXT",V.Caller.FilesDir,V.Local.sFile)
+			F.Intrinsic.File.Exists(V.Local.sFile,V.Local.bEx)
+			Function.Intrinsic.Control.If(V.Local.bEx,=,True)
+				F.Intrinsic.File.DeleteFile(V.Local.sFile)
+			Function.Intrinsic.Control.EndIf
+		F.Intrinsic.File.String2File(V.Local.sFile,V.Local.sFullStringADD)
+		Function.Global.General.CallWrapperSync(50, "UPLSHPTO/U")
+		
+	Function.Intrinsic.Control.EndIf	
+F.Intrinsic.UI.CloseWaitDialog
+f.Intrinsic.Control.Catch
+	F.Intrinsic.UI.CloseWaitDialog
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+
+Program.Sub.Create_Contact.End
+
+Program.Sub.Temp_Filewrite.Start
+f.Intrinsic.Control.Try
+v.local.sFilname.Declare
+v.local.sRet.Declare
+v.Local.sFilter.Declare
+v.local.sVal.Declare
+
+	f.Intrinsic.String.Build("CompanyID='{0}'",v.Args.CmpID,V.Local.sFilter)
+	f.Data.DataTable.Select(V.Args.DTName,v.Local.sFilter,v.local.sVal)
+	f.Intrinsic.Control.If(v.local.sVal,<>,"***NORETURN***")
+	
+		f.Intrinsic.String.Build("{0}",V.DataTable.[V.Args.DTName](v.local.sVal.long).Name!FieldValtrim,v.local.sRet) 'CMPY
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).BillingStreet!FieldValtrim,v.local.sRet)
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).BillingZip!FieldValtrim,v.local.sRet)   'zip
+
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).BillingCountry!FieldValtrim,v.local.sRet)   'ctry
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).BillingState!FieldValtrim,v.local.sRet)   'st
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).BillingCity!FieldValtrim,v.local.sRet)   'city
+		
+		
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).Name!FieldValtrim,v.local.sRet)   'CMPY
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).ShippingStreet!FieldValtrim,v.local.sRet)   'sadd1
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).ShippingZip!FieldValtrim,v.local.sRet)   'szip
+		
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).ShippingCountry!FieldValtrim,v.local.sRet)   'ctry
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).ShippingState!FieldValtrim,v.local.sRet)   'st
+		f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,v.Ambient.NewLine,V.DataTable.[V.Args.DTName](V.Local.sVal.Long).ShippingCity!FieldValtrim,v.local.sRet)   'city
+		
+	   'f.Intrinsic.String.Build("{0}{1}",V.DataTable.DTCmpyAddress(0).Value!FieldValtrim,v.Ambient.NewLine,v.local.sRet)   'area
+'		f.Intrinsic.String.Build("{0}{1}",V.DataTable.DTCmpyAddress(0).Value!FieldValtrim,v.Ambient.NewLine,v.local.sRet)   'ph1
+'		f.Intrinsic.String.Build("{0}{1}",V.DataTable.DTCmpyAddress(0).Value!FieldValtrim,v.Ambient.NewLine,v.local.sRet)   'ph2
+'		f.Intrinsic.String.Build("{0}{1}",V.DataTable.DTCmpyAddress(0).Value!FieldValtrim,v.Ambient.NewLine,v.local.sRet)   'are
+'		f.Intrinsic.String.Build("{0}{1}",V.DataTable.DTCmpyAddress(0).Value!FieldValtrim,v.Ambient.NewLine,v.local.sRet)   'ph1
+'		f.Intrinsic.String.Build("{0}{1}",V.DataTable.DTCmpyAddress(0).Value!FieldValtrim,v.Ambient.NewLine,v.local.sRet)   'ph2
+		
+		f.Intrinsic.String.Build("{0}\Cust5856_{1}.new",v.Caller.FilesDir,v.Caller.Terminal,v.local.sFilname)
+		F.Intrinsic.File.String2File(V.local.sFilname,v.local.sRet)
+		
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry	
+Program.Sub.Temp_Filewrite.End
+
+Program.Sub.Temp_FileRead.Start
+f.Intrinsic.Control.Try
+V.Local.sFilname.Declare
+v.local.bRet.Declare
+V.Local.sText.Declare
+V.Local.iFile.Declare
+
+'Read Company info to file to pass to core screen
+	F.Intrinsic.String.Build("{0}\Cust5856_{1}.new",V.Caller.FilesDir,v.Caller.Terminal,V.Local.sFilname)
+	Function.Intrinsic.File.Exists(V.Local.sFilname,v.local.bRet)
+	f.Intrinsic.Control.If(v.local.bRet,=,True)
+		F.Intrinsic.File.GetHandle(V.Local.iFile)
+		F.Intrinsic.File.OpenForRead(V.Local.sFilname,V.Local.iFile)
+		F.Intrinsic.File.ReadFile(V.Local.iFile,V.Local.sText)
+		f.Intrinsic.File.CloseFile(V.Local.iFile)
+		f.Intrinsic.String.Split(V.Local.sText,v.Ambient.NewLine,V.Local.sText)
+		'Billing Info
+		V.Passed.000005.Set(V.Local.sText(0))
+		V.Passed.000007.Set(V.Local.sText(1))
+		V.Passed.000013.Set(V.Local.sText(2))
+		V.Passed.000017.Set(V.Local.sText(3))
+		V.Passed.000012.Set(V.Local.sText(4))
+		V.Passed.000011.Set(V.Local.sText(5))
+		'Shipping Info
+		V.Passed.000006.Set(V.Local.sText(6))
+		V.Passed.000008.Set(V.Local.sText(7))
+		V.Passed.000023.Set(V.Local.sText(8))
+		V.Passed.000047.Set(V.Local.sText(9))
+		V.Passed.000020.Set(V.Local.sText(10))
+		V.Passed.000019.Set(V.Local.sText(11))
+		
+'		V.Passed.000026.Set(V.Local.sText(0))
+'		V.Passed.000027.Set(V.Local.sText(0))
+'		V.Passed.000017.Set(V.Local.sText(0))
+'		V.Passed.000029.Set(V.Local.sText(0))
+'		V.Passed.000030.Set(V.Local.sText(0))
+'		V.Passed.000031.Set(V.Local.sText(0))
+		F.Intrinsic.File.DeleteFile(V.Local.sFilname)
+	f.Intrinsic.Control.EndIf
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Temp_FileRead.End
+
+Program.Sub.CRM_chgstatus.Start
+f.Intrinsic.Control.Try
+v.Local.sSql.Declare
+
+f.Intrinsic.Control.If(v.Caller.Hook,=,51029)
+'save from CRM
+	f.Intrinsic.Control.CallSub(Hubspot_connect)
+
+	'Invoke email alert for SaleRep change
+	f.Intrinsic.Control.if(Variable.Passed.CRM-cboSRPersonRsp.Trim,<>,"")
+		f.Intrinsic.Control.CallSub(ReadTranFile,"REP",Variable.Passed.CRM-cboSRPersonRsp,"STATUS",Variable.Passed.CRM-cboSRStatus)
+	f.Intrinsic.Control.endif
+	
+	'Disable Stage update from CRM
+'	f.Intrinsic.Control.If(Variable.Passed.CRM-cboSRStatus.UCase,<>,"OPEN")
+'	f.Intrinsic.Control.ANDIf(v.Passed.CRM-txtSRCustPO.Trim,<>,"")
+'	
+'	'update to Quote
+'		f.Intrinsic.String.Build("UPDATE Deals set {0}Deal Stage{0} = 'decisionmakerboughtin' where DealId = '{1}' ",v.Ambient.DblQuote,v.Passed.CRM-txtSRCustPO,v.Local.sSql)
+'		Function.Automation.Hubspot.ExecuteSQL(v.Local.sSQL)
+'	f.Intrinsic.Control.endif
+	
+f.Intrinsic.Control.elseIf(v.Caller.Hook,=,51012)
+'CRM Populate
+	f.Intrinsic.Control.CallSub(BuildTranFile,"REP",Variable.Passed.CRM-cboSRPersonRsp,"STATUS",Variable.Passed.CRM-cboSRStatus)
+f.Intrinsic.Control.endif
+
+f.Intrinsic.Control.end
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.If(v.Ambient.ErrorNumber,=,207020)
+		f.Intrinsic.Control.end
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry	
+Program.Sub.CRM_chgstatus.End
+
+
+'Program.Sub.tabHotspot_Click.Start
+'f.Intrinsic.Control.Try
+
+''gui.frrmHubspot.tabHotspot.Visible(false)
+'f.Intrinsic.Control.If(Variable.Screen.frrmHubspot!tabHotspot.tab,=,0)
+
+''	gui.frrmHubspot.GsGridCSR.Visible(true)
+''	gui.frrmHubspot.GsGridQuotes.Visible(false)
+''	f.Intrinsic.UI.Msgbox("CSR")
+'	gui.frrmHubspot.GsGridCSR.SuspendLayout
+''	gui.frrmHubspot.GsGridQuotes.ResumeLayout
+''	gui.frrmHubspot.GsGridQuotes.SuspendLayout
+'f.Intrinsic.Control.ELSEIf(Variable.Screen.frrmHubspot!tabHotspot.tab,=,1)
+''	gui.frrmHubspot.GsGridQuotes.Visible(false)
+''	gui.frrmHubspot.GsGridCSR.Visible(false)
+''	f.Intrinsic.UI.Msgbox("Quote")
+''	gui.frrmHubspot.GsGridCSR.SuspendLayout
+'	gui.frrmHubspot.GsGridQuotes.SuspendLayout
+''	gui.frrmHubspot.GsGridCSR.ResumeLayout
+'f.Intrinsic.Control.EndIf
+''gui.frrmHubspot.tabHotspot.Visible(true)
+'f.Intrinsic.Control.Catch
+'	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+'	f.Intrinsic.Control.EndTry	
+'Program.Sub.tabHotspot_Click.End
+
+
+Program.Sub.Hubspot_connect.Start
+f.Intrinsic.Control.Try
+	v.Local.sErrorLogFile.Declare
+	v.Local.sDate.Declare
+	v.Local.sTime.Declare
+	v.Local.sConnStr.Declare
+
+	'Set the error log file path to the CUSTOM folder
+	f.Intrinsic.String.DateString(v.Ambient.Date,v.Local.sDate)
+	f.Intrinsic.String.TimeStringSec(v.Ambient.Time,v.Local.sTime)
+	f.Intrinsic.String.Build("{0}\CUSTOM\5856\HubspotLogFile_{1}_{2}.txt",v.Caller.GlobalDir,v.Local.sDate,v.Local.sTime,v.Local.sErrorLogFile)
+	f.Intrinsic.Control.CallSub(Hubspot_ReadSettings)
+	
+	f.Intrinsic.Control.If(v.Args.HubspotSetting,=,True)
+		'Function.Automation.HubSpot.SetLoginInfo(v.Screen.frmHubspotSettings!txtHub_ClientId.Text,v.Screen.frmHubspotSettings!txtHub_ClientSecret.text,"GetAndRefresh")
+		'f.Intrinsic.String.Build("InitiateOAuth=GetAndRefresh;OAuth Client Id={0}; OAuth Client Secret ={1};LogFile={2};Verbosity=5",v.Screen.frmHubspotSettings!txtHub_ClientId.Text,v.Screen.frmHubspotSettings!txtHub_ClientSecret.text,v.Local.sErrorLogFile,v.Local.sConnStr)
+		f.Intrinsic.String.Build("InitiateOAuth=GetAndRefresh;OAuth Client Id={0}; OAuth Client Secret ={1};",v.Screen.frmHubspotSettings!txtHub_ClientId.Text,v.Screen.frmHubspotSettings!txtHub_ClientSecret.text,v.Local.sConnStr)
+		Function.Automation.HubSpot.SetConnectionString(v.Local.sConnStr)
+'		'Test connection
+'		f.Intrinsic.Control.CallSub(Hubspot_Testconn)
+		F.ODBC.Connection!conx.OpenCompanyConnection(300)
+	f.Intrinsic.Control.else
+		f.Intrinsic.UI.Msgbox("Hubspot Setting config file not found")
+		gui.frmHubspotSettings..visible(true)
+	f.Intrinsic.Control.endif
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Hubspot_connect.End
+
+
+
+Program.Sub.Hubspot_UpdateStage.Start
+f.Intrinsic.Control.Try
+
+v.Local.sSql.Declare
+v.Local.sTranNO.Declare
+v.Local.sDealStage.Declare
+
+	'QO Line Save
+	f.Intrinsic.Control.CallSub(Hubspot_connect)
+
+	f.Intrinsic.String.LPad(v.Args.TranNo,"0",7,v.Local.sTranNO)
+	
+	f.Intrinsic.String.Build("select USER_5 from {0} where {1} = '{2}' ",v.Args.TblName,v.Args.FldName,v.Local.sTranNO,v.Local.sSql)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRO("rst",V.Local.sSql)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False) 
+	F.Intrinsic.Control.ANDIf(V.ODBC.conx!rst.FieldValtrim!USER_5,<>,"")
+		f.Intrinsic.Control.If(v.Args.HubMode,=,"AMT")
+			f.Intrinsic.String.Build("UPDATE Deals set Amount = {0} where DealId = '{1}' ",V.Args.Amt.Float,V.ODBC.conx!rst.FieldValtrim!USER_5,v.Local.sSql)
+		f.Intrinsic.Control.Elseif(v.Args.HubMode,=,"STAGE")
+		
+			f.Intrinsic.Control.If(Variable.Passed.000140,=,"Y")
+			'Deal Won
+				v.Local.sDealStage.Set("a3267d5e-c202-4eb4-8c93-f0b2f6546be4")
+				gui.frrmHubspot.GsGridQuotes.SetCellValueByColumnName("GridView_Q","DealStage",v.Args.rowindex,"Closed Won")
+			f.Intrinsic.Control.elseIf(Variable.Passed.000141,=,"Y")
+			'Deal Lost
+				v.Local.sDealStage.Set("ca024ba7-9f0e-4948-8d2a-00ae8403cc7a")
+				gui.frrmHubspot.GsGridQuotes.SetCellValueByColumnName("GridView_Q","DealStage",v.Args.rowindex,"Closed Lost")
+			f.Intrinsic.Control.EndIf
+			f.Intrinsic.String.Build("UPDATE Deals set [Deal Stage] = '{0}' where DealId = '{1}' ",v.Local.sDealStage,V.ODBC.conx!rst.FieldValtrim!USER_5,v.Local.sSql)
+		F.Intrinsic.Control.EndIf
+		Function.Automation.Hubspot.ExecuteSQL(v.Local.sSQL)
+	F.Intrinsic.Control.EndIf
+	F.ODBC.conx!rst.Close
+	f.ODBC.Connection!conx.Close
+	f.Intrinsic.Control.end
+	
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Hubspot_UpdateStage.End
+
+Program.Sub.cmdSettings_Click.Start
+f.Intrinsic.Control.Try
+'	gui.frmHubspotSettings..Show
+	gui.frmHubspotSettings..Visible(true)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.cmdSettings_Click.End
+Program.Sub.cmdHubspot_SaveSettings_Click.Start
+f.Intrinsic.Control.Try
+v.local.sRet.Declare
+v.Local.sFilname.Declare
+V.Local.sTemp.Declare
+
+	f.Intrinsic.Control.If(v.Screen.frmHubspotSettings!txtHub_Account.text,=,"")
+		f.Intrinsic.UI.Msgbox("Invalid Data")
+		gui.frmHubspotSettings.txtHub_Account.SetFocus
+		f.Intrinsic.Control.ExitSub
+	f.Intrinsic.Control.elseIf(v.Screen.frmHubspotSettings!txtHub_ClientId.text,=,"")
+		f.Intrinsic.UI.Msgbox("Invalid Data")
+		gui.frmHubspotSettings.txtHub_ClientId.SetFocus
+		f.Intrinsic.Control.ExitSub
+	f.Intrinsic.Control.elseIf(v.Screen.frmHubspotSettings!txtHub_ClientSecret.text,=,"")
+		f.Intrinsic.UI.Msgbox("Invalid Data")
+		gui.frmHubspotSettings.txtHub_ClientSecret.SetFocus
+		f.Intrinsic.Control.ExitSub
+	f.Intrinsic.Control.EndIf
+
+
+	f.Intrinsic.String.Build("{0}",v.Screen.frmHubspotSettings!txtHub_Account.text,v.local.sRet) 'Account
+	f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,"!*!",v.Screen.frmHubspotSettings!txtHub_ClientId.text,v.local.sRet) ' ClientID
+	f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,"!*!",v.Screen.frmHubspotSettings!txtHub_ClientSecret.text,v.local.sRet)   'Secret
+	
+
+	Gui.frmHubspotSettings.lstEmailGrp.RetrieveCheckedListItems(V.Local.sTemp)
+	f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,"!*!",V.Local.sTemp,v.local.sRet)   'Email Grp
+	
+	f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,"!*!",v.Screen.frmHubspotSettings!txtRFQStage_Subj.text,v.local.sRet)   'RFQ Stage
+	f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,"!*!",v.Screen.frmHubspotSettings!txtMultRfqStage_Body.text,v.local.sRet)   'RFQ Body
+	
+	f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,"!*!",v.Screen.frmHubspotSettings!txtSalesRep_Subj.text,v.local.sRet)   'SalesRep Subj
+	f.Intrinsic.String.Build("{0}{1}{2}",v.local.sRet,"!*!",v.Screen.frmHubspotSettings!txtSalesRep_Body.text,v.local.sRet)   'SalesRep Body
+	
+	
+	
+
+	f.Intrinsic.String.Build("{0}\Custom\5856\Hotspotsettings.new",v.Caller.GlobalDir,v.local.sFilname)
+	F.Intrinsic.File.String2File(V.local.sFilname,v.local.sRet)
+	
+	f.Intrinsic.UI.Msgbox("Settings saved")
+	gui.frmHubspotSettings..Visible(false)
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+	
+Program.Sub.cmdHubspot_SaveSettings_Click.End
+
+Program.Sub.Hubspot_ReadSettings.Start
+f.Intrinsic.Control.Try
+v.local.sRet.Declare
+v.Local.sFilname.Declare
+v.local.bRet.Declare
+V.Local.iFile.Declare
+V.Local.sText.Declare
+v.Local.sSql.Declare
+v.Local.i.Declare
+v.Local.bExt.Declare
+
+	f.Intrinsic.String.Build("{0}\Custom\5856\Hotspotsettings.new",v.Caller.GlobalDir,v.local.sFilname)
+	Function.Intrinsic.File.Exists(V.Local.sFilname,v.local.bRet)
+	f.Intrinsic.Control.If(v.local.bRet,=,True)
+		F.Intrinsic.File.GetHandle(V.Local.iFile)
+		F.Intrinsic.File.OpenForRead(V.Local.sFilname,V.Local.iFile)
+		F.Intrinsic.File.ReadFile(V.Local.iFile,V.Local.sText)
+		f.Intrinsic.File.CloseFile(V.Local.iFile)
+		f.Intrinsic.String.Split(V.Local.sText,"!*!",V.Local.sText)
+		
+		gui.frmHubspotSettings.txtHub_Account.Text(V.Local.sText(0))
+		gui.frmHubspotSettings.txtHub_ClientId.Text(V.Local.sText(1))
+		gui.frmHubspotSettings.txtHub_ClientSecret.Text(V.Local.sText(2))
+		
+		f.Intrinsic.Control.If(v.Caller.Hook,<>,51029)
+		f.Intrinsic.Control.ANDIf(v.Global.bEnt,=,False)
+'		CRM Hook SAVE exit
+'			GLOBALCOMMON.GS_Group
+			F.ODBC.Connection!conC.OpenCommonConnection(300)
+			Function.ODBC.Connection!conC.ExecuteAndReturn("select GS_Group from USER_GROUPS",V.Local.sRet)  
+			f.Global.Security.GetAllUserGroups(v.Caller.CompanyCode,V.Local.sRet)
+			f.Intrinsic.Control.If(V.Local.sRet.Trim,<>,"")
+				gui.frmHubspotSettings.lstEmailGrp.AddListViewColumn("Email Group",500,0)
+				f.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+				f.Intrinsic.Control.For(v.Local.i,0,V.Local.sRet.UBound,1)
+					gui.frmHubspotSettings.lstEmailGrp.AddListItem(V.Local.sRet(v.Local.i),V.Local.sRet(v.Local.i))
+					f.Intrinsic.String.IsInString(V.Local.sText(3),V.Local.sRet(v.Local.i),True,v.Local.bExt)
+					f.Intrinsic.Control.if(v.Local.bExt)
+						gui.frmHubspotSettings.lstEmailGrp.SetListItemProps(V.Local.sRet(v.Local.i),,True,,,,,,)
+					f.Intrinsic.Control.endif
+				f.Intrinsic.Control.Next(v.Local.i)
+			f.Intrinsic.Control.endif
+			F.ODBC.Connection!conC.Close
+		f.Intrinsic.Control.EndIf
+		
+		gui.frmHubspotSettings.txtRFQStage_Subj.Text(V.Local.sText(4))
+		gui.frmHubspotSettings.txtMultRfqStage_Body.Text(V.Local.sText(5))
+		gui.frmHubspotSettings.txtSalesRep_Subj.Text(V.Local.sText(6))
+		gui.frmHubspotSettings.txtSalesRep_Body.Text(V.Local.sText(7))
+		
+		
+		f.Intrinsic.Variable.AddRV("HubspotSetting",True)
+	f.Intrinsic.Control.Else
+		f.Intrinsic.UI.Msgbox("Hubspot settings files/data not found")
+		f.Intrinsic.Control.If(v.Caller.User.Trim,=,"SUPERVSR")
+			gui.frmHubspotSettings..visible(true)
+		f.Intrinsic.Control.Endif
+		f.Intrinsic.Variable.AddRV("HubspotSetting",False)
+	f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+
+Program.Sub.Hubspot_ReadSettings.End
+Program.Sub.frmHubspotSettings_UnLoad.Start
+gui.frmHubspotSettings..Visible(false)
+
+Program.Sub.frmHubspotSettings_UnLoad.End
+
+Program.Sub.cmdImportCSR_Click.Start
+f.Intrinsic.Control.Try
+
+v.local.iRet.Declare
+
+Function.Intrinsic.UI.MsgBox("Do you want to Import Data?", "Confirm", 4,v.local.iRet)
+F.Intrinsic.Control.If(v.local.iRet,=,6)
+	F.Intrinsic.UI.InvokeWaitDialog("Data...Importing, Please Wait...")
+'	f.Intrinsic.Control.CallSub(Refresh_Data,"ImportData","CSR","LoadXML",false)
+	f.Intrinsic.Control.CallSub(Refresh_Data2,"LoadXML",false)
+	F.Intrinsic.UI.CloseWaitDialog
+f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.cmdImportCSR_Click.End
+Program.Sub.cmdHubspotInit_Click.Start
+f.Intrinsic.Control.Try
+
+	Function.Automation.HubSpot.SetLoginInfo(v.Screen.frmHubspotSettings!txtHub_ClientId.Text,v.Screen.frmHubspotSettings!txtHub_ClientSecret.text,"GetAndRefresh")
+	Function.Automation.HubSpot.SetConnectionString
+	Function.Automation.HubSpot.SelectToDatatable("DealQuote","false","select top 1 DealId from Deals")
+	f.Data.Datatable.Close("DealQuote")
+	f.Intrinsic.UI.Msgbox("Connection successfull")
+	
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry		
+Program.Sub.cmdHubspotInit_Click.End
+
+Program.Sub.Check_WebImporter.Start
+f.Intrinsic.Control.Try
+V.Local.sFile.Declare
+V.Local.bExists.Declare
+V.Local.sRet.Declare
+
+	'Check to make sure they have a GSSParamccc.txt or GSSParam.txt file before moving forward.
+	F.Intrinsic.String.Build("{0}\GSSPARAM{1}.txt",V.Caller.FilesDir,V.Caller.CompanyCode,V.Local.sFile)
+	F.Intrinsic.File.Exists(V.Local.sFile,V.Local.bExists)
+	F.Intrinsic.Control.If(V.Local.bExists,=,False)
+		'We don't have a GSSParamccc.txt so lets see if we have a generic.
+		F.Intrinsic.String.Build("{0}\GSSPARAM.txt",V.Caller.FilesDir,V.Local.sFile)
+		F.Intrinsic.File.Exists(V.Local.sFile,V.Local.bExists)
+		F.Intrinsic.Control.If(V.Local.bExists,=,False)
+			'We don't have a generic so create it.
+			F.Intrinsic.String.Build("WEB ORDER DIRECTORY   = {0}\WEB_ORDERS{1}WEB ERROR DIRECTORY   = {0}\WEB_ORDERS\WEB_ERRORS{1}WEB CONVERTED DIR     = {0}\WEB_ORDERS\CONVERTED{1}WEB UPLOADED DIRECTORY= {0}\WEB_ORDERS\UPLOADED{1}EMAIL FROM ADDRESS    = {1}EMAIL TO ADDRESS      = ",V.Caller.FilesDir,V.Ambient.NewLine,V.Local.sRet)
+			F.Intrinsic.File.String2File(V.Local.sFile,V.Local.sRet)
+			'Now create the directories
+			F.Intrinsic.String.Build("{0}\WEB_ORDERS",V.Caller.FilesDir,V.Local.sFile)
+			F.Intrinsic.File.CreateDir(V.Local.sFile)
+			F.Intrinsic.String.Build("{0}\WEB_ORDERS\WEB_ERRORS",V.Caller.FilesDir,V.Local.sFile)
+			F.Intrinsic.File.CreateDir(V.Local.sFile)
+			F.Intrinsic.String.Build("{0}\WEB_ORDERS\CONVERTED",V.Caller.FilesDir,V.Local.sFile)
+			F.Intrinsic.File.CreateDir(V.Local.sFile)
+			F.Intrinsic.String.Build("{0}\WEB_ORDERS\UPLOADED",V.Caller.FilesDir,V.Local.sFile)
+			F.Intrinsic.File.CreateDir(V.Local.sFile)
+		F.Intrinsic.Control.EndIf
+	F.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+Program.Sub.Check_WebImporter.End
+
+Program.Sub.Refresh_Data2.Start
+f.Intrinsic.Control.Try
+
+v.Local.stitle.Declare
+v.Local.i.Declare
+v.Local.iTotClmn.Declare
+v.Local.ssql.Declare
+V.Local.sRet.Declare
+V.Local.sRet1.Declare
+v.Local.sfieldsName.Declare
+v.Local.sXML.Declare
+v.Local.dtLastupdate.Declare
+v.Local.bExists.Declare
+v.Local.sFilter.Declare
+		
+		'This is for use in case they do want to sync inventory parts
+		'Function.Automation.HubSpot.SelectToDatatable("dtTables","True","select top 10 * from Products")	
+		
+		f.Intrinsic.String.Build("SELECT  ' ' as GSS_Customer,' ' as GSS_Contact,' ' as GSS_CSRNO,' ' as GSS_QuoteNO,Deals.DealId,Deals.AssociatedCompanyIds,Deals.[Create Date] AS RequestDate,Deals.[Create Date] AS CreateDate,[Deal Name] as DealName,Deals.AssociatedVids, Deals.[Deal owner] as DealOwner, ' ' as SalesPerson, ' ' as Email, Amount, [Deal Stage] as DealStage_data, [Close Date] as CloseDate FROM Deals where AssociatedCompanyIds IS NOT NULL AND AssociatedVids IS NOT NULL and [Close Date] >= '{0}'", v.Global.dClosedDate.SQLServerFriendly, v.Local.ssql)
+		
+		'Testing only
+		'v.Local.ssql.Set("select top 10 ' ' as GSS_Customer, ' ' as GSS_Contact, ' ' as GSS_QuoteNo, ' ' as GSS_CSRNO, * from Deals")
+
+		Function.Automation.HubSpot.SelectToDatatable("DealIDNew","True",v.Local.sSQL)	
+		
+		'Get Owners info
+		f.Intrinsic.Control.If(v.DataTable.dtowners.Exists,=,False)
+			v.Local.ssql.Set("select *, [FirstName] + ' ' + [LastName] as OwnerName, Email from Owners")
+			Function.Automation.HubSpot.SelectToDatatable("dtOwners","True",v.Local.sSQL)
+		f.Intrinsic.Control.EndIf
+			
+		
+		f.Data.Dictionary.CreateFromDatatable("dictOwnerName","dtOwners","OwnerID","OwnerName")
+		f.Data.Dictionary.SetDefaultReturn("dictOwnerName","")
+		f.Data.Dictionary.CreateFromDatatable("dictOwnerEmail","dtOwners","OwnerID","Email")
+		f.Data.Dictionary.SetDefaultReturn("dictOwnerEmail","")
+		f.Data.DataTable.FillFromDictionary("DealIDNew","dictOwnerName", "DealOwner","Salesperson")
+		f.Data.DataTable.FillFromDictionary("DealIDNew","dictOwnerEmail", "DealOwner","Email")
+		f.Data.Dictionary.Close("dictOwnerEmail")
+		f.Data.Dictionary.Close("dictOwnerName")
+		
+
+		F.Data.DataView.Create("DealIDNew","DVDeal",22,"","")
+		Function.Data.DataView.ToDataTableDistinct("DealIDNew","DVDeal","DTTemp","AssociatedVids")
+		f.Data.DataView.Create("DTTemp","DVSTemp")
+		Function.Data.DataView.ToString("DTTemp", "DVSTemp", "AssociatedVids", "*!*", ",", V.Local.sRet)
+		V.Local.sRet1.Set(V.Local.sRet)
+		
+		f.Intrinsic.String.Split(V.Local.sRet,",",V.Local.sRet)
+		f.Intrinsic.String.Split(V.Local.sRet1,",",V.Local.sRet1)
+		F.Intrinsic.Control.For(v.Local.i,0,V.Local.sRet.UBound,1)
+			f.Intrinsic.String.Build("{0}",V.Local.sRet(v.Local.i),V.Local.sRet(v.Local.i))
+			f.Intrinsic.String.Build("'{0}'",V.Local.sRet1(v.Local.i),V.Local.sRet1(v.Local.i))
+		f.Intrinsic.Control.Next(v.Local.i)
+		f.Intrinsic.String.Join(V.Local.sRet,",",V.Local.sRet)
+		f.Intrinsic.String.Join(V.Local.sRet1,",",V.Local.sRet1)
+		f.Data.DataView.Close("DealIDNew","DVDeal")
+		f.Data.DataView.Close("DTTemp","DVSTemp")
+		f.Data.DataTable.Close("DTTemp")
+		
+		
+		'load contact cross ref
+		f.Intrinsic.String.Build("select rtrim(UF16),CID from CRM_UF_VALUE where UF16 IN ({0})",V.Local.sRet1,V.Local.sSQL)
+		F.Data.Dictionary.CreateFromSQL("dict", "conx",V.Local.sSQL)
+		F.Data.Dictionary.SetDefaultReturn("dict", "")
+		F.Data.DataTable.FillFromDictionary("DealIDNew", "dict", "AssociatedVids", "GSS_Contact")
+		F.Data.Dictionary.Close("dict")
+
+		'Contact Details
+		f.Intrinsic.String.Build("{0}\Custom\5856\data5856_{1}.new",v.Caller.GlobalDir,"CONT",v.local.sXML)
+'		f.Intrinsic.String.Build("{0}\Custom\5856\data5856_{1}.new",v.Caller.GlobalDir,"QOCONT",v.local.sXML)
+		'f.Intrinsic.Control.If(v.Args.LoadXML,=,false)
+			
+			'Function.Automation.HubSpot.SelectToDatatable("ContactbyID_DD","False","SELECT [First Name] AS fname,[Last Name] as lname,trim(CanonicalVid) as CID,[Company Name] as CompanyName,[Associated Company ID] as CompanyID, [Job Title] as JobTitle,[Opportunity Stage] as OpportunityStage,[Street Address] as StreetAddress,[State/Territory] as StateTerritory,City,[Postal Code] as PostalCode,[Country/Region] as Country,[Mobile Phone Number] as MobilePhoneNumber,[Phone Number] as PhoneNumber,[Fax Number] as FaxNumber,Email,Status FROM Contacts")
+		
+			f.Intrinsic.String.Build("SELECT [First Name] AS fname,[Last Name] as lname,trim(CanonicalVid) as CID,[Company Name] as CompanyName,[Associated Company ID] as CompanyID, [Job Title] as JobTitle,[Opportunity Stage] as OpportunityStage,[Street Address] as StreetAddress,[State/Territory] as StateTerritory,City,[Postal Code] as PostalCode,[Country/Region] as Country,[Mobile Phone Number] as MobilePhoneNumber,[Phone Number] as PhoneNumber,[Fax Number] as FaxNumber,Email,Status FROM Contacts  where trim(CanonicalVid) in ({0}) ",v.Local.sRet,v.Local.ssql)
+			'v.Local.ssql.Set("select top 10 * from contacts")
+			
+			Function.Automation.HubSpot.SelectToDatatable("ContactbyID","False",v.Local.sSQL)
+			
+			f.Data.DataTable.SaveToXML("ContactbyID",0,False,v.Local.sXML)
+'		f.Intrinsic.Control.Else
+'			F.Data.DataTable.CreateFromXML("ContactbyID",V.Local.sXML,True)
+'		f.Intrinsic.Control.EndIf
+		
+		Function.Intrinsic.File.GetFileDateTime (V.Local.sXML,v.Local.dtLastupdate)
+		f.Intrinsic.String.Build("New/Updated Company/Contact data last Imported from HUBSPOT : {0}",v.Local.dtLastupdate,V.Local.sRet)
+		gui.frrmHubspot.lblLastupdated.Caption(V.Local.sRet)
+	
+		F.Data.DataView.Create("DealIDNew","DVDeal",22,"","")
+		Function.Data.DataView.ToDataTableDistinct("DealIDNew","DVDeal","DTTemp","AssociatedCompanyIds")
+		f.Data.DataView.Create("DTTemp","DVSTemp")
+		Function.Data.DataView.ToString("DTTemp", "DVSTemp", "AssociatedCompanyIds", "*!*", ",",V.Local.sRet)
+		
+		V.Local.sRet1.Set(V.Local.sRet)
+		
+		f.Intrinsic.String.Split(V.Local.sRet,",",V.Local.sRet)
+		f.Intrinsic.String.Split(V.Local.sRet1,",",V.Local.sRet1)
+		F.Intrinsic.Control.For(v.Local.i,0,V.Local.sRet.UBound,1)
+			f.Intrinsic.String.Build("{0}",V.Local.sRet(v.Local.i),V.Local.sRet(v.Local.i))
+			f.Intrinsic.String.Build("'{0}'",V.Local.sRet1(v.Local.i),V.Local.sRet1(v.Local.i))
+		f.Intrinsic.Control.Next(v.Local.i)
+		f.Intrinsic.String.Join(V.Local.sRet,",",V.Local.sRet)
+		f.Intrinsic.String.Join(V.Local.sRet1,",",V.Local.sRet1)
+		
+		f.Data.DataView.Close("DealIDNew","DVDeal")
+		f.Data.DataView.Close("DTTemp","DVSTemp")
+		f.Data.DataTable.Close("DTTemp")
+
+	
+		'load customer cross ref
+		f.Intrinsic.String.Build("select rtrim(external_id),Customer from v_CUST_FORM_INFO where external_id IN ({0})",V.Local.sRet1,V.Local.sSQL)
+		F.Data.Dictionary.CreateFromSQL("dict", "conx",V.Local.sSQL)
+		F.Data.Dictionary.SetDefaultReturn("dict", "")
+		F.Data.DataTable.FillFromDictionary("DealIDNew", "dict", "AssociatedCompanyIds", "GSS_Customer")
+		F.Data.Dictionary.Close("dict")
+		
+		
+		f.Intrinsic.Control.If(v.DataTable.DTCmpyAddress.Exists,=,True)
+			f.Data.DataTable.Close("DTCmpyAddress")
+		f.Intrinsic.Control.endif
+	
+		'Company Address
+'		f.Intrinsic.String.Build("{0}\Custom\5856\data5856_{1}.new",v.Caller.GlobalDir,"CMPY",v.local.sXML)	
+'		f.Intrinsic.File.Exists(v.Local.sXML,v.Local.bExists)
+'		f.Intrinsic.Control.If(v.Local.bExists,=,False)
+'			f.Intrinsic.File.String2File(v.Local.sXML,"")
+'		f.Intrinsic.Control.EndIf
+'		f.Intrinsic.String.Build("{0}\Custom\5856\data5856_{1}.new",v.Caller.GlobalDir,"QOCMPY",v.local.sXML)		
+		'f.Intrinsic.Control.If(v.Args.LoadXML,=,false)
+			f.Intrinsic.String.Build("Select trim([Company ID]) as CompanyID,Name,[Billing City] as BillingCity,[Country/Region] as BillingCountry,[Billing State] as BillingState,[Billing Street] as BillingStreet,[Postal Code] as BillingZip,[Country/Region] as ADDCountry,'' as ADDFax,[Last Modified Date] as ADDLastModifiedDate,[State/Region] as ADDState,[Street Address] as ADDStreetAddress,[Street Address 2] as ADDStreetAddress2,City,[Phone Number] as ADDPhone,[Postal Code] as ADDPostalCode,[City] as ShippingCity,[Country/Region] as ShippingCountry,[State/Region] as ShippingState,[Shipping Street] as ShippingStreet,[Postal Code] as ShippingZip from Companies where [Company ID] in ({0})",V.Local.sRet,v.Local.sSQL)
+			'v.Local.ssql.Set("select top 10 * from companies")
+			Function.Automation.HubSpot.SelectToDatatable("DTCmpyAddress","True",v.Local.sSQL)
+			f.Data.DataTable.SaveToXML("DTCmpyAddress",0,False,v.Local.sXML)
+'		f.Intrinsic.Control.Else
+'			
+'			F.Data.DataTable.CreateFromXML("DTCmpyAddress",V.Local.sXML,True)
+'		f.Intrinsic.Control.EndIf
+		
+		
+		'=====================
+		'Load CSR cross reference
+		F.Data.DataView.Create("DealIDNew","DVDeal",22,"","")
+		Function.Data.DataView.ToDataTableDistinct("DealIDNew","DVDeal","DTTemp","DealId")
+		f.Data.DataView.Create("DTTemp","DVSTemp")
+		Function.Data.DataView.ToString("DTTemp", "DVSTemp", "DealId", "*!*", ",", V.Local.sRet)
+		
+		f.Intrinsic.String.Split(V.Local.sRet,",",V.Local.sRet)
+		F.Intrinsic.Control.For(v.Local.i,0,V.Local.sRet.UBound,1)
+			f.Intrinsic.String.Build("'{0}'",V.Local.sRet(v.Local.i),V.Local.sRet(v.Local.i))
+		f.Intrinsic.Control.Next(v.Local.i)
+		f.Intrinsic.String.Join(V.Local.sRet,",",V.Local.sRet)
+		
+		f.Data.DataView.Close("DealIDNew","DVDeal")
+		f.Data.DataView.Close("DTTemp","DVSTemp")
+		f.Data.DataTable.Close("DTTemp")
+		
+		'load Quote cross ref
+		f.Intrinsic.String.Build("select rtrim(USER_5),quote_no from quote_header where USER_5 IN ({0})",V.Local.sRet,V.Local.sSQL)
+		F.Data.Dictionary.CreateFromSQL("dict", "conx",V.Local.sSQL)
+		F.Data.Dictionary.SetDefaultReturn("dict", "")
+		F.Data.DataTable.FillFromDictionary("DealIDNew", "dict", "DealId", "GSS_QuoteNO")
+		F.Data.Dictionary.Close("dict")
+		
+		'load CSR cross ref
+		f.Intrinsic.String.Build("select rtrim(Cust_PO),REQUEST_NUMBER from v_CUST_SERV_REQ where Cust_PO IN ({0})",V.Local.sRet,V.Local.sSQL)
+		F.Data.Dictionary.CreateFromSQL("dict", "conx",V.Local.sSQL)
+		F.Data.Dictionary.SetDefaultReturn("dict", "")
+		F.Data.DataTable.FillFromDictionary("DealIDNew", "dict", "DealId", "GSS_CSRNO")
+		F.Data.Dictionary.Close("dict")
+		'================================
+		
+		f.Data.Datatable.AddExpressionColumn("DealIDNew","AssociatedVids1","String","Trim(AssociatedVids)")
+		f.Data.Datatable.AddExpressionColumn("DealIDNew","AssociatedCompanyIds1","String","Trim(AssociatedCompanyIds)")
+		v.Local.sfieldsName.Set("D.GSS_Customer*!*D.GSS_Contact*!*D.GSS_QuoteNO*!*D.GSS_CSRNO*!*D.AssociatedVids1*!*C.CID*!*D.DealId*!*D.DealName*!*D.AssociatedCompanyIds1*!*D.DealStage_data*!*D.RequestDate*!*D.Amount*!*C.fname*!*c.lname*!*D.CreateDate*!*c.CompanyName*!*c.JobTitle*!*c.StreetAddress*!*c.StateTerritory*!*c.City*!*c.PostalCode*!*c.Country*!*c.MobilePhoneNumber*!*c.PhoneNumber*!*c.FaxNumber*!*C.Email*!*D.SalesPerson*!*c.Status*!*D.CloseDate")
+		
+		F.Data.Linq.Join("leftjoin","datatable","DealIDNew*!*D","datatable","ContactbyID*!*C","D.AssociatedVids = C.CID",v.Local.sfieldsName,"","","","DealIDQ",true)
+		
+		'Dictionary to fill in the deal stage
+		f.Data.DataTable.AddColumn("DealIDQ","DealStage","string")
+		f.Data.Dictionary.Create("dictDealStages")
+		f.Data.Dictionary.AddItem("dictDealStages","b25cb1a9-99ce-45e2-9981-3994ae21a874","Needs Analysis")
+		f.Data.Dictionary.AddItem("dictDealStages","222093f5-faf2-4d09-b094-d6b515e7c60a","Proposal")
+		f.Data.Dictionary.AddItem("dictDealStages","50e71897-bf57-49fc-9d06-d21335455424","Negotiation")
+		f.Data.Dictionary.AddItem("dictDealStages","a3267d5e-c202-4eb4-8c93-f0b2f6546be4","Closed Won")
+		f.Data.Dictionary.AddItem("dictDealStages","ca024ba7-9f0e-4948-8d2a-00ae8403cc7a","Closed Lost")
+		f.Data.Dictionary.SetDefaultReturn("dictDealStages","")
+		f.Data.DataTable.FillFromDictionary("DealIDQ","dictDealStages","DealStage_data","DealStage")
+		f.Data.Dictionary.Close("dictDealStages")
+		
+		F.Data.DataView.Create("DealIDQ","DVDeal")
+		
+		'Possible deal stage (pipeline) values and their equivalent stage data IDs in Hubspot (which is what we have to use to fill this data in):
+		'	Needs Analysis	=		b25cb1a9-99ce-45e2-9981-3994ae21a874
+		'	Proposal		=		222093f5-faf2-4d09-b094-d6b515e7c60a
+		'	Negotiation		=		50e71897-bf57-49fc-9d06-d21335455424
+		'	Closed Won		=		a3267d5e-c202-4eb4-8c93-f0b2f6546be4
+		'	Closed Lost		=		ca024ba7-9f0e-4948-8d2a-00ae8403cc7a
+		
+		f.Intrinsic.Control.If(v.DataTable.DTQuote.Exists,=,False)
+'			Function.Data.DataTable.Clone("DealIDQ","DealIDFinal",true)
+'			f.Data.Datatable.DeleteRow("DealIDFinal")
+'			F.Data.DataTable.Merge("DealIDQ","DealIDFinal",False,2)
+			'loading when no xml file exist
+			
+			
+			'f.Data.DataView.SetFilter("DealIDQ","DVDeal","DealStage in ('Proposal', 'Negotiation')")
+			f.Data.DataView.ToDataTable("DealIDQ","DVDeal","DTQuote",True)
+			
+'			f.Data.DataView.SetFilter("DealIDQ","DVDeal","DealStage='Needs Analysis'")
+'			f.Data.DataView.ToDataTable("DealIDQ","DVDeal","DTCSR",True)
+
+			f.Intrinsic.Control.CallSub(LoadData_Quote)
+			'f.Intrinsic.Control.CallSub(LoadGrid)
+		f.Intrinsic.Control.Else
+			f.Data.Datatable.DeleteRow("DTQuote")
+			'f.Data.Datatable.DeleteRow("DTCSR")
+			
+			'f.Data.DataView.SetFilter("DealIDQ","DVDeal","DealStage in ('Proposal', 'Negotiation')")
+			f.Data.DataView.ToDataTable("DealIDQ","DVDeal","DTQuoteTemp")
+			
+'			f.Data.DataView.SetFilter("DealIDQ","DVDeal","DealStage='Needs Analysis'")
+'			f.Data.DataView.ToDataTable("DealIDQ","DVDeal","DTCSRTemp")
+			
+			F.Data.DataTable.Merge("DTQuoteTemp","DTQuote",False,2)
+			'F.Data.DataTable.Merge("DTCSRTemp","DTCSR",False,2)
+			
+			f.Data.DataTable.Close("DTQuoteTemp")
+			'f.Data.DataTable.Close("DTCSRTemp")
+		f.Intrinsic.Control.EndIf
+
+		f.Data.DataTable.AcceptChanges("dtQuote")
+		f.Data.DataTable.Close("DealIDQ")
+		f.Data.DataTable.Close("DealIDNew")
+		f.Data.DataTable.Close("ContactbyID")
+
+'		f.Intrinsic.Control.CallSub(SetDealValue,"DTName","DTCSR","DVName","DVCSR")
+'		f.Intrinsic.Control.CallSub(SetDealValue,"DTName","DTQuote","DVName","DVQuote")
+		
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+
+Program.Sub.Refresh_Data2.End
+
+
+
+Program.Sub.LoadXMLData.Start
+f.Intrinsic.Control.Try
+v.local.sXML.Declare
+v.Local.sRet.Declare
+v.Local.ssql.Declare
+v.Local.i.Declare
+
+
+
+'runs periodically
+	f.Intrinsic.Control.CallSub(Hubspot_ReadSettings)
+	
+	f.Intrinsic.Control.If(v.Args.HubspotSetting,=,True)
+		Function.Automation.HubSpot.SetLoginInfo(v.Screen.frmHubspotSettings!txtHub_ClientId.Text,v.Screen.frmHubspotSettings!txtHub_ClientSecret.text,"Refresh")
+		Function.Automation.HubSpot.SetConnectionString
+		
+		v.Local.sSql.Set("SELECT  DealId,AssociatedCompanyIds,AssociatedVids FROM Deals  where AssociatedCompanyIds IS NOT NULL AND AssociatedVids IS NOT NULL AND [Deal Stage] IN ('decisionmakerboughtin','presentationscheduled')")
+		Function.Automation.HubSpot.SelectToDatatable("DealIDNew","True",v.Local.sSQL)
+		
+		F.Data.DataView.Create("DealIDNew","DVDeal",22,"","")
+		Function.Data.DataView.ToDataTableDistinct("DealIDNew","DVDeal","DTTemp","AssociatedVids")
+		f.Data.DataView.Create("DTTemp","DVSTemp")
+		Function.Data.DataView.ToString("DTTemp", "DVSTemp", "AssociatedVids", "*!*", ",", V.Local.sRet)
+	
+		f.Intrinsic.String.Split(V.Local.sRet,",",V.Local.sRet)
+		F.Intrinsic.Control.For(v.Local.i,0,V.Local.sRet.UBound,1)
+			f.Intrinsic.String.Build("{0}",V.Local.sRet(v.Local.i),V.Local.sRet(v.Local.i))
+		f.Intrinsic.Control.Next(v.Local.i)
+		f.Intrinsic.String.Join(V.Local.sRet,",",V.Local.sRet)
+		f.Data.DataView.Close("DealIDNew","DVDeal")
+		f.Data.DataView.Close("DTTemp","DVSTemp")
+		f.Data.DataTable.Close("DTTemp")
+				
+	'Contact Details
+		f.Intrinsic.String.Build("{0}\Custom\5856\data5856_{1}.new",v.Caller.GlobalDir,"CONT",v.local.sXML)
+		f.Intrinsic.String.Build("SELECT [First Name] AS fname,[Last Name] as lname,trim(CanonicalVid) as CID,[Company Name] as CompanyName,[Job Title] as JobTitle,[Opportunity Stage] as OpportunityStage,[Street Address] as StreetAddress,[State/Province] as StateProvince,City,[Postal Code] as PostalCode,[Country/Region] as Country,[Mobile Phone Number] as MobilePhoneNumber,[Phone Number] as PhoneNumber,[Fax Number] as FaxNumber,Email,Status,Products,[Product Summary] as ProductSummary,[Additional Information] as AdditionalInformation,[Material Details] as MaterialDetails FROM Contacts  where CanonicalVid in ({0}) ",v.Local.sRet,v.Local.ssql)
+	
+		Function.Automation.HubSpot.SelectToDatatable("ContactbyID","False",v.Local.sSQL)
+		f.Data.DataTable.SaveToXML("ContactbyID",0,False,v.Local.sXML)
+		
+		f.Data.Datatable.Close("ContactbyID")
+		
+		F.Data.DataView.Create("DealIDNew","DVDeal",22,"","")
+		Function.Data.DataView.ToDataTableDistinct("DealIDNew","DVDeal","DTTemp","AssociatedCompanyIds")
+		f.Data.DataView.Create("DTTemp","DVSTemp")
+		Function.Data.DataView.ToString("DTTemp", "DVSTemp", "AssociatedCompanyIds", "*!*", ",",V.Local.sRet)
+		
+		f.Intrinsic.String.Split(V.Local.sRet,",",V.Local.sRet)
+		F.Intrinsic.Control.For(v.Local.i,0,V.Local.sRet.UBound,1)
+			f.Intrinsic.String.Build("{0}",V.Local.sRet(v.Local.i),V.Local.sRet(v.Local.i))
+		f.Intrinsic.Control.Next(v.Local.i)
+		f.Intrinsic.String.Join(V.Local.sRet,",",V.Local.sRet)
+		
+		f.Data.DataView.Close("DealIDNew","DVDeal")
+		f.Data.DataView.Close("DTTemp","DVSTemp")
+		f.Data.DataTable.Close("DTTemp")
+	
+		'Company Address
+		f.Intrinsic.String.Build("{0}\Custom\5856\data5856_{1}.new",v.Caller.GlobalDir,"CMPY",v.local.sXML)		
+		f.Intrinsic.String.Build("Select trim([Company ID]) as CompanyID,Name,[Billing City] as BillingCity,[Billing Country] as BillingCountry,[Billing State/Province] as BillingState,[Billing Street] as BillingStreet,[Billing Zip/Postal Code] as BillingZip,[Country/Region] as ADDCountry,FAX as ADDFax,[Last Modified Date] as ADDLastModifiedDate,[State/Region] as ADDState,[Street Address] as ADDStreetAddress,[Street Address 2] as ADDStreetAddress2,City,[Phone Number] as ADDPhone,[Postal Code] as ADDPostalCode,[Shipping City] as ShippingCity,[Shipping Country] as ShippingCountry,[Shipping State/Province] as ShippingState,[Shipping Street] as ShippingStreet,[Shipping Zip/Postal Code] as ShippingZip from Companies where [Company ID] in ({0})",V.Local.sRet,v.Local.sSQL)
+	
+		Function.Automation.HubSpot.SelectToDatatable("DTCmpyAddress","True",v.Local.sSQL)
+		f.Data.DataTable.SaveToXML("DTCmpyAddress",0,False,v.Local.sXML)	
+		f.Data.Datatable.Close("DTCmpyAddress")	
+		
+		f.Data.DataTable.Close("DealIDNew")
+	f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.end
+
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.LoadXMLData.End
+
+Program.Sub.Contact_USRFLD.Start
+f.Intrinsic.Control.Try
+V.Local.sQuery.Declare
+
+F.Intrinsic.String.Concat("Select * From CRM_UF_VALUE where CID=",v.Args.CID,V.Local.sQuery)
+	F.ODBC.Connection!conx.OpenLocalRecordsetRW("rst",V.Local.sQuery)
+	F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,True)
+		F.ODBC.conx!rst.AddNew
+		F.ODBC.conx!rst.Set!CompID(v.Args.COMPID)
+		F.ODBC.conx!rst.Set!Type(12)
+	
+		F.ODBC.conx!rst.Set!CID(v.Args.CID)
+	F.Intrinsic.Control.EndIf
+
+	
+	F.ODBC.conx!rst.Set!UF16(v.Args.HUBCOMPID)
+	
+	F.ODBC.conx!rst.Update
+	F.ODBC.conx!rst.Close
+
+f.Intrinsic.Control.Catch
+	f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+	f.Intrinsic.Control.EndTry
+
+Program.Sub.Contact_USRFLD.End
+
+Program.Sub.CSR_TYPE.Start
+f.Intrinsic.Control.Try
+V.Local.sTitles.Declare
+V.Local.iWidths.Declare
+V.Local.sQuery.Declare
+V.Local.sRet.Declare
+
+	F.Intrinsic.String.Split("Req_Type","*!*",V.Local.sTitles)
+	F.Intrinsic.String.Split("1800","*!*",V.Local.iWidths)
+	V.Local.sQuery.set("Select Req_Type From CUST_SERV_REQ_TYP")
+	F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+	
+	F.Intrinsic.UI.Browser("Select CSRType","conx",V.Local.sQuery,V.Local.sTitles,V.Local.iWidths,V.Local.sRet)
+'	F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+'		F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+'	F.Intrinsic.Control.EndIf
+	
+	f.Intrinsic.Variable.AddRV("CSRType",V.Local.sRet)
+
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.CSR_TYPE.End
+
+Program.Sub.cmdGrpBrowse_Click.Start
+Program.Sub.cmdGrpBrowse_Click.End
+
+Program.Sub.Email_Alert.Start
+f.Intrinsic.Control.Try
+
+v.Local.iUsrID.Declare
+v.Local.sRecipient.Declare
+v.Local.sSender.Declare
+v.Local.sTemp.Declare
+v.Local.sTemp1.Declare
+
+v.Local.sSubj.Declare
+v.Local.sBody.Declare
+V.Local.sChkList.Declare
+V.Local.iFor.Declare
+V.Local.ssql.Declare
+Variable.Local.bResult.Declare
+
+
+'v.Local.sTemp1.Set(v.Screen.frmHubspotSettings!txtEnailGrp.text)
+'f.Intrinsic.Control.If(v.Local.sTemp1.Trim,<>,"")
+'we need to send an email with the error information and file
+	'Getting all the stuff we need for sending an email
+	f.Global.Security.GetUserId(v.Caller.User,v.Caller.CompanyCode,v.Local.iUsrId)
+	f.Global.Security.GetFullName(v.Caller.User,v.Local.sTemp)
+	f.Global.Security.GetUserEmail(v.Caller.User,v.Local.sTemp1)
+	f.Intrinsic.String.Build("{0}*!*{1}",v.Local.sTemp1,v.Local.sTemp,v.Local.sSender)
+	v.Local.sTemp.Set("")
+	v.Local.sTemp1.Set("")
+	
+	
+	f.Intrinsic.Control.If(v.Args.EMAILMODE,=,"RFQ")
+		Gui.frmHubspotSettings.lstEmailGrp.RetrieveCheckedListItems(V.Local.sChkList)
+		F.Intrinsic.Control.If(V.Local.sChkList,<>,"***NORETURN***")
+			F.Intrinsic.String.Split(V.Local.sChkList,"*!*",V.Local.sChkList)
+			F.Intrinsic.Control.For(V.Local.iFor,0,V.Local.sChkList.UBound,1)
+'				Function.Intrinsic.Debug.InvokeDebugger
+'				Function.Intrinsic.Debug.Stop
+				f.Global.Security.GetGroupEmails(V.Local.sChkList(V.Local.iFor),v.Local.sTemp1)
+				f.Intrinsic.Control.If(V.Local.iFor,=,0)
+'					v.Local.sTemp.Set(v.Local.sTemp1)
+					f.Intrinsic.String.Build("{0}*!*{1}",v.Args.Email,v.Local.sTemp1,v.Local.sTemp)
+				f.Intrinsic.Control.Else
+					f.Intrinsic.String.Build("{0}*!*{1}",v.Local.sTemp,v.Local.sTemp1,v.Local.sTemp)
+				f.Intrinsic.Control.endif
+			F.Intrinsic.Control.Next(V.Local.iFor)
+				'split the emails
+			f.Intrinsic.String.Split(v.Local.sTemp,"*!*",v.Local.sTemp)
+			'put the emails back together
+			f.Intrinsic.String.Join(v.Local.sTemp,"@!@*!*",v.Local.sTemp)
+		f.Intrinsic.Control.Else
+			'group security not selected
+			f.Intrinsic.Control.ExitSub
+		f.Intrinsic.Control.Endif
+	f.Intrinsic.Control.elseIf(v.Args.EMAILMODE,=,"REP")
+'		f.Global.Security.GetUserEmail(Variable.Passed.CRM-cboSRPersonRsp,v.Local.sTemp)
+		f.Intrinsic.String.Build("select email from USER_INFORMATION where upper(first_name) + ' ' +  upper(last_name) ='{0}'",Variable.Passed.CRM-cboSRPersonRsp.UCase,V.Local.ssql)
+		F.ODBC.Connection!conC.OpenCommonConnection(300)
+		Function.ODBC.Connection!conC.ExecuteAndReturn(V.Local.ssql,V.Local.sTemp)  
+		f.Intrinsic.Control.If(V.Local.sTemp.Trim,=,"")
+			'no emails assoiciated
+			Function.ODBC.Connection!conC.Close
+			f.Intrinsic.Control.ExitSub
+		f.Intrinsic.Control.EndIf
+		Function.ODBC.Connection!conC.Close
+	f.Intrinsic.Control.elseIf(v.Args.EMAILMODE,=,"STATUS")
+		f.Intrinsic.String.Build("Select Owners.Email from  Deals Join Owners on Owners.OwnerID= Deals.[Deal owner] where DealId = '{0}' ",Variable.Passed.CRM-txtSRCustPO.trim,v.Local.sSql)
+		Function.Automation.HubSpot.SelectToDatatable("DTDealEmail","True",v.Local.sSQL)		
+		f.Intrinsic.Control.If(v.DataTable.DTDealEmail.RowCount,>,0)
+			'no emails assoiciated
+			v.Local.sTemp.Set(V.DataTable.DTDealEmail(0).Email!FieldValtrim)
+		f.Intrinsic.Control.Else
+			'no emails assoiciated
+			f.Data.Datatable.Close("DTDealEmail")
+			f.Intrinsic.Control.ExitSub
+		f.Intrinsic.Control.EndIf
+		f.Data.Datatable.Close("DTDealEmail")
+	f.Intrinsic.Control.ElseIf(v.Args.EMAILMODE,=,"HUBCSR")
+		f.Global.Security.GetGroupEmails("HUBCSR",v.Local.sTemp1)
+'		Function.Intrinsic.Variable.IsNull(v.Local.sTemp1,Variable.Local.bResult)
+'		f.Intrinsic.Control.If(v.Local.sTemp1.Trim,=,"")
+'		F.Intrinsic.Control.If(v.Local.bResult,=,True)
+'			f.Intrinsic.UI.Msgbox("HUBCSR - Email group not setup")
+'			f.Intrinsic.Control.ExitSub
+'		f.Intrinsic.Control.EndIf
+		'split the emails
+		f.Intrinsic.String.Split(v.Local.sTemp1,"*!*",v.Local.sTemp)
+		f.Intrinsic.Control.If(v.Local.sTemp.Trim,=,"")
+			f.Intrinsic.Control.ExitSub
+		f.Intrinsic.Control.EndIf
+		'put the emails back together
+		f.Intrinsic.String.Join(v.Local.sTemp,"@!@*!*",v.Local.sTemp)
+	f.Intrinsic.Control.EndIf
+	
+
+	'put *!* in the front of the string
+	f.Intrinsic.String.Build("*!*{0}",v.Local.sTemp,v.Local.sRecipient)
+	
+	f.Intrinsic.Control.If(v.Args.EMAILMODE,=,"RFQ")
+		'RFQ Stage Change
+		v.Local.sSubj.Set(v.Screen.frmHubspotSettings!txtRFQStage_Subj.text)
+		v.Local.sBody.Set(v.Screen.frmHubspotSettings!txtMultRfqStage_Body.text)
+
+		f.Intrinsic.String.Build("{0}{1}{2}",v.Local.sBody,v.Ambient.NewLine,v.Args.AcctBody,v.Local.sBody)
+	f.Intrinsic.Control.elseIf(v.Args.EMAILMODE,=,"REP")
+		'Sales Rep Change
+		'Variable.Passed.CRM-txtSRNo
+		'Variable.Passed.CRM-cboSRCompany
+		v.Local.sSubj.Set(v.Screen.frmHubspotSettings!txtSalesRep_Subj.text)
+		v.Local.sBody.Set(v.Screen.frmHubspotSettings!txtSalesRep_Body.text)
+		
+		f.Intrinsic.String.Build("{0}{1}ACCT:{2}{1}CSRNO:{3}{1}Person Responsible{4}",v.Local.sBody,v.Ambient.NewLine,Variable.Passed.CRM-cboSRCompany,Variable.Passed.CRM-txtSRNo,Variable.Passed.CRM-cboSRPersonRsp,v.Local.sBody)
+	
+	f.Intrinsic.Control.elseIf(v.Args.EMAILMODE,=,"STATUS")
+		v.Local.sSubj.Set("CRM Status Changed")
+		'? For example “Your sample is in process. Your technician is _______.” 
+		f.Intrinsic.String.Build("Your {0} is in process. Your technician is {1} and the Status is {2}",Variable.Passed.CRM-cboSRType,Variable.Passed.CRM-cboSRPersonRsp,Variable.Passed.CRM-cboSRStatus,v.Local.sBody)
+	f.Intrinsic.Control.ElseIf(v.Args.EMAILMODE,=,"HUBCSR")
+
+		v.Local.sSubj.Set("New CSR Created")
+		f.Intrinsic.String.Build("New CSR Created . CSR#:{0}, the sales person responsible is {1}, CSR Type:{2}",v.Args.CSRNO,v.Args.SALESREP,v.Args.CSRType,v.Local.sBody)
+	f.Intrinsic.Control.EndIf
+	f.Global.Messaging.QueueMessage(v.Caller.CompanyCode,v.Local.iUsrID,"GCG_5856",v.Local.sSubj.Trim,v.Local.sSender,v.Local.sRecipient,v.Local.sBody.trim)
+
+'f.Intrinsic.Control.EndIf
+
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.Email_Alert.End
+
+Program.Sub.BuildTranFile.Start
+f.Intrinsic.Control.Try
+
+v.local.sRet.Declare
+V.local.sFilname.Declare
+
+F.Intrinsic.String.Build("{0}\{1}_5856.trn",V.Caller.LocalGSSTempDir,v.Caller.User,V.local.sFilname)
+
+f.Intrinsic.String.Build("{0}*!*{1}",v.Args.REP,v.Args.STATUS,v.local.sRet)
+F.Intrinsic.File.String2File(V.local.sFilname,v.local.sRet)
+f.Intrinsic.Control.End
+
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.BuildTranFile.End
+
+Program.Sub.ReadTranFile.Start
+f.Intrinsic.Control.Try
+
+v.local.sRet.Declare
+V.local.sFilname.Declare
+V.Local.iFile.Declare
+v.local.bRet.Declare
+
+	F.Intrinsic.String.Build("{0}\{1}_5856.trn",V.Caller.LocalGSSTempDir,v.Caller.User,V.local.sFilname)
+	Function.Intrinsic.File.Exists(V.Local.sFilname,v.local.bRet)
+	f.Intrinsic.Control.If(v.local.bRet,=,True)
+		F.Intrinsic.File.GetHandle(V.Local.iFile)
+		F.Intrinsic.File.OpenForRead(V.Local.sFilname,V.Local.iFile)
+		F.Intrinsic.File.ReadFile(V.Local.iFile,V.Local.sRet)
+		f.Intrinsic.File.CloseFile(V.Local.iFile)
+		
+		f.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+		f.Intrinsic.Control.If(v.Args.REP.Trim,<>,V.Local.sRet(0).trim)
+		'REP changed
+			f.Intrinsic.Control.CallSub(Email_Alert,"EMAILMODE","REP")
+'			f.Intrinsic.String.Build("{0}",v.Args.REP,v.local.sRet)
+'			F.Intrinsic.File.String2File(V.local.sFilname,v.local.sRet)
+		f.Intrinsic.Control.EndIf
+		
+		f.Intrinsic.Control.If(v.Args.STATUS.Trim,<>,V.Local.sRet(1).trim)
+		f.Intrinsic.Control.AndIf(Variable.Passed.CRM-txtSRCustPO.trim,<>,"")
+		'Status changed
+			f.Intrinsic.Control.CallSub(Email_Alert,"EMAILMODE","STATUS")
+'			f.Intrinsic.String.Build("{0}",v.Args.REP,v.local.sRet)
+'			F.Intrinsic.File.String2File(V.local.sFilname,v.local.sRet)
+		f.Intrinsic.Control.EndIf
+	f.Intrinsic.Control.endif	
+	
+f.Intrinsic.Control.Catch
+f.Intrinsic.Control.CallSub(ErrorMsg, CurrentSub, v.Ambient.CurrentSubroutine)
+f.Intrinsic.Control.EndTry
+Program.Sub.BuildTranFile.End
+Program.Sub.ReadTranFile.End
+
+Program.Sub.Comments.Start
+${$5$}$3.0.0.0$}$1
+${$6$}$dduncan$}$20211014101133595$}$r0o+00bj735YsiGsQ60YIo/Zb+26OZQGQCdlQLsfezKZwi+BoeeEO2qglQ2SEgYrgyb/27+1+C0=
+Program.Sub.Comments.End
